@@ -6,18 +6,13 @@
  * 1 - Convert candidates object to array
  */
 function candidatesObjToArray(candidates) {
-<<<<<<< HEAD
   return Object.keys(candidates).map(function (candidate) { return candidates[candidate]; });
-=======
-return Object.keys(candidates).map(candidate => candidates[candidate]) // map the function with the parameter candidate and return candidates times candidate
->>>>>>> 0d8f82cb9ac64b8b41454345b1d9a892de2841d3
 }
 
 /**
  * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
 */
 function filterInvalidVoters(voters) {
-<<<<<<< HEAD
   var correctVoter = voters.filter(function(voter){
     if(voter.votingCard.length <= 2){
       if(voter.votingCard[0] != voter.votingCard[1]){
@@ -27,15 +22,7 @@ function filterInvalidVoters(voters) {
   });
   return correctVoter;
 }
-=======
-   
-//return Object.keys(voters).map(function 
 
-
-
-
-
->>>>>>> 0d8f82cb9ac64b8b41454345b1d9a892de2841d3
 
 /**
  * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
@@ -130,20 +117,3 @@ module.exports = {
   getWinner,
   winnerMessage
 }
-
-
-
-
-
-// var supermarketPrices = {
-//     bread: 1,
-//     milk: 2,
-//     cola: 3,
-//     chocolate: 1.50
-    
-//   }
-//   var prices = Object.keys(supermarketPrices).map(function (element){
-  
-//      return supermarketPrices[element];
-//   })
-//   prices
