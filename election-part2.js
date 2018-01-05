@@ -19,7 +19,12 @@ class Voter {
     }
 }
 
-let voter1 = new Voter('Jane Finnegan', 19, [1,3])
+let voter1 = new Voter('Jane Finnegan', 19, [1,3]);
+let voter2 = new Voter('Norman Beracha', 35, [3,4]);
+let voter3 = new Voter('Salome Kadek', 22, [2,1,3]);
+let voter4 = new Voter('Wei Li', 19, [1,2]);
+let voter5 = new Voter('Sam MacKinnon', 59, [1,4]);
+
 /**
  * 2 - Write a Candidate class modelling a candidate 
  * in the election. Candidates are also voters (they 
@@ -40,7 +45,12 @@ var candidates = class Candidates {
 /**
  * 3 - Write an Election class which models the election.
  */
-
+var election = class Election{
+    constructor(Voter,Condidate){
+        this.Voter=Voter;
+        this.Condidate=Candidates;
+    }
+}
 
 
 // Include your votingPopulation array here.
