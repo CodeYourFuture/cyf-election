@@ -27,7 +27,7 @@ class Candidate extends Voter {
 	constructor(name,age,votingCard,party,numVotes) {
 		super(name,age,votingCard);
 		this.party = party;
-		this.numVotes = numVotes;
+		this.numVotes = 0;
 	}
 };
 
@@ -35,6 +35,26 @@ class Candidate extends Voter {
 /**
  * 3 - Write an Election class which models the election.
  */
+ class Election {
+ 	constructor(validVoters,candidates) {
+ 		this.validVoters = validVoters;
+ 		this.candidates = candidates;
+ 		this.winner = '';
+ 	};
+
+ 	runElection() {
+ 		this.candidates = runElection(this.validVoters, this.candidates);
+ 	}
+ 	
+ 	getWinner() {
+ 		this.winner = getWinner(this.candidates);
+ 	};
+
+ 	printWinnerMessage() {
+ 		return winnerMessage(this.winner);
+ 	}
+
+ }
 
 
 
@@ -50,20 +70,23 @@ let votingPopulation = [
 
 
 // Include your candidates array here.
-let candidates = [
-	new Candidate('Tamara Faiza', 46, [1,1], 'Pizza Party', 0),
-	new Candidate('Aylin Duke', 39, [2,2], 'Foam Party', 0),
-	new Candidate('Clay Roderick', 54, [3,4], 'Flat Earth Party', 0),
-	new Candidate('Nour al-Din', 32, [4,1], 'Pizza Party', 0)
-];
+let candidates = {
+	1: new Candidate('Tamara Faiza', 46, [1,1], 'Pizza Party'),
+	2: new Candidate('Aylin Duke', 39, [2,2], 'Foam Party'),
+	3: new Candidate('Clay Roderick', 54, [3,4], 'Flat Earth Party'),
+	4: new Candidate('Nour al-Din', 32, [4,1], 'Pizza Party')
+};
 
 
-let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
+let allVoters = votingPopulation.concat(candidatesObjToArray(candidates)); 
 
 let validVoters = filterInvalidVoters(allVoters);
 
 let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
-
-console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+// console.log(election.candidates);
+election.getWinner();
+// console.log(election.winner);
+console.log(election.printWinnerMessage());
+// Example of how the winner message can be printed.

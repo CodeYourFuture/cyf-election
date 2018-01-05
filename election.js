@@ -33,7 +33,7 @@ function filterInvalidVoters(voters) {
 function runElection(voters, candidates) {
   var score = 1;
   voters.forEach(function(voter) {
-    for (var i = 1; i < 5; i++) {
+    for (var i = 0; i < 4; i++) {
       if (voter.votingCard[0] === i) {
         candidates[i].numVotes += score;
       } else if (voter.votingCard[1] === i) {
