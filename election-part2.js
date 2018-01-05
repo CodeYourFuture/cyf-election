@@ -8,14 +8,33 @@ const {
 } = require('./election');
 
 /**
- * 1 - Write a Voter class modelling a member of the population who votes in the election.
+ * 1 - Write a Voter class modelling a member of the population 
+ * who votes in the election.
  */
+class Voter {
+    constructor(name,age,votingCard){
+        this.name = name;
+        this.age = age;
+        this.votingCard = votingCard
+    }
+}
 
-
+let voter1 = new Voter('Jane Finnegan', 19, [1,3])
 /**
- * 2 - Write a Candidate class modelling a candidate in the election. Candidates are also voters (they can vote for themselves, or anyone else).
+ * 2 - Write a Candidate class modelling a candidate 
+ * in the election. Candidates are also voters (they 
+ * can vote for themselves, or anyone else).
  * However they have some extra properties.
  */
+var candidates = class Candidates {
+    constructor(name,age,votingCard,party){
+        this.name = name;
+        this.age = age;
+        this.votingCard = votingCard;
+        this.party = party;
+    }
+
+}
 
 
 /**
@@ -25,11 +44,22 @@ const {
 
 
 // Include your votingPopulation array here.
-let votingPopulation = [];
+let votingPopulation = [
+    {name: 'Jane Finnegan', age: 19, votingCard: [1,3]},
+    {name: 'Norman Beracha', age: 35, votingCard: [3,4]},
+    {name: 'Salome Kadek', age: 22, votingCard: [2,1,3]},
+    {name: 'Wei Li', age: 19, votingCard: [1,2]},
+    {name: 'Sam MacKinnon', age: 59, votingCard: [1,4]}
+];
 
 
 // Include your candidates object here.
-let candidates = {};
+let candidates = {
+    1: {name: 'Tamara Faiza', age: 46, votingCard: [1,1], party: 'Pizza Party', numVotes: 0},
+    2: {name: 'Aylin Duke', age: 39, votingCard: [2,2], party: 'Foam Party', numVotes: 0},
+    3: {name: 'Clay Roderick', age: 54, votingCard: [3,4], party: 'Flat Earth Party', numVotes: 0},
+    4: {name: 'Nour al-Din', age: 32, votingCard: [4,1], party: 'Pizza Party', numVotes: 0}
+};
 
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
