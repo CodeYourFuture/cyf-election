@@ -31,26 +31,37 @@ let voter5 = new Voter('Sam MacKinnon', 59, [1,4]);
  * can vote for themselves, or anyone else).
  * However they have some extra properties.
  */
-var candidates = class Candidates {
-    constructor(name,age,votingCard,party){
-        this.name = name;
-        this.age = age;
-        this.votingCard = votingCard;
-        this.party = party;
-    }
 
-}
+class Candidate extends Voter {
+	constructor(name,age,votingCard,party,numVotes) {
+		super(name,age,votingCard);
+		this.party = party;
+	}
+};
 
 
 /**
  * 3 - Write an Election class which models the election.
  */
-var election = class Election{
-    constructor(Voter,Condidate){
-        this.Voter=Voter;
-        this.Condidate=Candidates;
+var election = class Election {
+    constructor(validVoters,candidates) {
+        this.validVoters = validVoters;
+        this.candidates = candidates;
+        this.winner = '';
+    };
+    runElection() {
+        this.candidates = runElection(this.validVoters, this.candidates);
+    }
+    
+    getWinner() {
+        this.winner = getWinner(this.candidates);
+    };
+
+    printWinnerMessage() {
+        return winnerMessage(this.winner);
     }
 }
+
 
 
 // Include your votingPopulation array here.
