@@ -1,5 +1,7 @@
+/* BROWSERIFY FUNCTIONS */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
+/* election-part2.js */
 
 // Importing the functions from what you did in part 1.
 const {
@@ -88,6 +90,34 @@ let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
 // console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+
+
+/* ---------------------------------- Add Data to HTML start -----------------------------------*/
+// Add voters to Voters Table
+var table = document.querySelector(".voters-table");
+
+for(let i = 0; i < votingPopulation.length; i++) {
+  var tableRow = document.createElement("tr");
+
+  var tableDataLeft = document.createElement("td");
+  var tableTextLeft = document.createTextNode(i + 1);
+
+  var tableDataRight = document.createElement("td");
+  var tableTextRight = document.createTextNode(votingPopulation[i].name);
+
+  tableDataLeft.classList.add("voters-table-left");
+  tableDataRight.classList.add("voters-table-right");
+  tableDataLeft.appendChild(tableTextLeft);
+  tableDataRight.appendChild(tableTextRight);
+  tableRow.appendChild(tableDataLeft);
+  tableRow.appendChild(tableDataRight);
+
+  table.appendChild(tableRow);
+}
+
+/* ---------------------------------- Add Data to HTML end ------------------------------------*/
+
+/* election.js */
 
 },{"./election":2}],2:[function(require,module,exports){
 /**
