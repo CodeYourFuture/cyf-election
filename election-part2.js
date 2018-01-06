@@ -1,3 +1,5 @@
+
+
 // Importing the functions from what you did in part 1.
 const {
     candidatesObjToArray,
@@ -84,4 +86,8 @@ let validVoters = filterInvalidVoters(allVoters);
 let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
-console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+// console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+// var button = document.createElement("button");
+// var buttonText = document.createTextNode("Fetch Books");
+// button.appendChild(buttonText);
+// document.body.appendChild(button);
