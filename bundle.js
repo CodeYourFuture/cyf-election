@@ -88,34 +88,74 @@ let validVoters = filterInvalidVoters(allVoters);
 
 let election = new Election(validVoters, candidates);
 
-election.runElection(); // Example of how runElection() can be called.
+// election.runElection(); // Example of how runElection() can be called.
 // console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
 
 
+
+
 /* ---------------------------------- Add Data to HTML start -----------------------------------*/
+
 // Add voters to Voters Table
-var table = document.querySelector(".voters-table");
+
+let votersTable = document.querySelector(".vot-table .voters-table");
 
 for(let i = 0; i < votingPopulation.length; i++) {
-  var tableRow = document.createElement("tr");
+  let votersTableRow = document.createElement("tr");
 
-  var tableDataLeft = document.createElement("td");
-  var tableTextLeft = document.createTextNode(i + 1);
+  let votersDataLeft = document.createElement("td");
+  let votersTextLeft = document.createTextNode(i + 1);
 
-  var tableDataRight = document.createElement("td");
-  var tableTextRight = document.createTextNode(votingPopulation[i].name);
+  let votersDataRight = document.createElement("td");
+  let votersTextRight = document.createTextNode(votingPopulation[i].name);
 
-  tableDataLeft.classList.add("voters-table-left");
-  tableDataRight.classList.add("voters-table-right");
-  tableDataLeft.appendChild(tableTextLeft);
-  tableDataRight.appendChild(tableTextRight);
-  tableRow.appendChild(tableDataLeft);
-  tableRow.appendChild(tableDataRight);
+  votersDataLeft.classList.add("voters-table-left");
+  votersDataRight.classList.add("voters-table-right");
+  votersDataLeft.appendChild(votersTextLeft);
+  votersDataRight.appendChild(votersTextRight);
+  votersTableRow.appendChild(votersDataLeft);
+  votersTableRow.appendChild(votersDataRight);
 
-  table.appendChild(tableRow);
+  votersTable.appendChild(votersTableRow);
+}
+
+// Add candidates to Candidates Table
+
+let candidatesTable = document.querySelector(".candidates-table .voters-table");
+
+for (const person in candidates) {
+  // console.log(candidates[person].name);
+  let candidatesTableRow = document.createElement("tr");
+
+  let candidatesDataLeft = document.createElement("td");
+  let candidatesTextLeft = document.createTextNode(candidates[person].name);
+
+  let candidatesDataRight = document.createElement("td");
+  let candidatesTextRight = document.createTextNode(candidates[person].age);
+
+  candidatesDataLeft.classList.add("voters-table-left");
+  candidatesDataRight.classList.add("voters-table-right");
+  candidatesDataLeft.appendChild(candidatesTextLeft);
+  candidatesDataRight.appendChild(candidatesTextRight);
+  candidatesTableRow.appendChild(candidatesDataLeft);
+  candidatesTableRow.appendChild(candidatesDataRight);
+
+  candidatesTable.appendChild(candidatesTableRow);
 }
 
 /* ---------------------------------- Add Data to HTML end ------------------------------------*/
+
+
+/* ----------- Run Election ----------- */
+let runButton = document.querySelector(".run-button");
+let winnerParagraph = document.querySelector(".winner-message p");
+
+
+runButton.addEventListener("click", () => {
+  election.runElection();
+  winnerParagraph.innerHTML = election.printWinnerMessage();
+});
+
 
 /* election.js */
 
