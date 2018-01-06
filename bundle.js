@@ -125,10 +125,17 @@ function createVotersList(votersArray) {
 createVotersList(votingPopulation);
 
 
+//Add event listener on button
+
+var runButton = document.querySelector('.run');
+var messageP = document.querySelector('.winner-message');
 
 
-
-
+runButton.addEventListener("click", function handler() {
+  // election.runElection();
+  messageP.innerHTML = election.printWinnerMessage();
+  this.removeEventListener("click", handler);
+});
 
 
 },{"./election":2}],2:[function(require,module,exports){

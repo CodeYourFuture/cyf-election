@@ -9,9 +9,6 @@ body {
 	background-color: #ffffff;
 }
 
-body{
-	position: relative;
-}
 
 /*.container {
 	min-height: 100%;
@@ -30,9 +27,17 @@ body{
 
 .header p {
 	font-size: 1.4rem;
-	padding-right: 3rem;
+	padding-right: 5rem;
 	padding-left: 3rem;
 }
+
+.header .code {
+	color: #F52034;
+}
+
+/*.content {
+	flex: 1;
+}*/
 
 .lists {
 	display: flex;
@@ -59,18 +64,21 @@ body{
 }
 
 .winner-message {
+	margin-top: 3rem;
+	padding: 1.2rem;
+	text-align: center;
 	font-size: 1.7rem;
 	color: #BF1929;
-	padding: 1.2rem;
+	text-transform: uppercase;
+	
 /*	border: #BF1929 solid 1px;*/
 }
-/*
-.footer {
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translate(-50%);
-	padding: 1rem;
+
+/*.footer {
+	margin-top: auto;
+	display: flex;
+	justify-content: center;
+	padding: 1rem 0rem;
 	color: #000000;
 	background-color: #9BA8D1;
 	width: 100%;
