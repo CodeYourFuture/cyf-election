@@ -151,9 +151,10 @@ let runButton = document.querySelector(".run-button");
 let winnerParagraph = document.querySelector(".winner-message p");
 
 
-runButton.addEventListener("click", () => {
+runButton.addEventListener("click", function handler() {
   election.runElection();
   winnerParagraph.innerHTML = election.printWinnerMessage();
+  this.removeEventListener("click", handler);
 });
 
 
