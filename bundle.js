@@ -65,8 +65,9 @@ let votingPopulation = [
 	new Voter('Norman Beracha', 35, [3, 4]),
 	new Voter('Wei Li',  19, [1, 2]),
 	new Voter('Sam MacKinnon', 59, [1, 4]),
-	new Voter('Clay Roderick', 54,[3, 4]),
-	new Voter('Nour al-Din', 32,[4, 1])
+  new Voter('Salome Kadek', 22, [2,1,3])
+	// new Voter('Clay Roderick', 54,[3, 4]),
+	// new Voter('Nour al-Din', 32,[4, 1])
 ];
 
 
@@ -85,11 +86,11 @@ let validVoters = filterInvalidVoters(allVoters);
 
 let election = new Election(validVoters, candidates);
 
-election.runElection(); // Example of how runElection() can be called.
+// election.runElection(); // Example of how runElection() can be called.
 // console.log(election.candidates);
-election.getWinner();
+// election.getWinner();
 // console.log(election.winner);
-console.log(election.printWinnerMessage());
+// console.log(election.printWinnerMessage());
 // Example of how the winner message can be printed.
 
 
@@ -132,7 +133,8 @@ var messageP = document.querySelector('.winner-message');
 
 
 runButton.addEventListener("click", function handler() {
-  // election.runElection();
+  election.runElection();
+  election.getWinner();
   messageP.innerHTML = election.printWinnerMessage();
   this.removeEventListener("click", handler);
 });
@@ -174,7 +176,7 @@ function filterInvalidVoters(voters) {
 function runElection(voters, candidates) {
   var score = 1;
   voters.forEach(function(voter) {
-    for (var i = 0; i < 4; i++) {
+    for (var i = 1; i < 5; i++) {
       if (voter.votingCard[0] === i) {
         candidates[i].numVotes += score;
       } else if (voter.votingCard[1] === i) {
