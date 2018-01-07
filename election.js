@@ -29,7 +29,8 @@ function filterInvalidVoters(voters) {
  */
 function runElection(voters, candidates) {
     for(i=0; i < voters.length; i++){
-              if(voters[i].votingCard[0] === 1 ){
+              if(voters[i].votingCard['0'] === 1 ){
+                console.log(candidates);
                 candidates[1].numVotes++    
             }
               if(voters[i].votingCard[1] === 1 ){
@@ -83,7 +84,7 @@ function getWinner(candidates) {
 function winnerMessage(winner) {
     return winner.name + ' has won the election with ' + winner.numVotes + ' votes!';
 }
-
+/*
 // A sample population of a small number of voters, stored as an array
 let votingPopulation = [
     {name: 'Jane Finnegan', age: 19, votingCard: [1,3]},
@@ -109,12 +110,12 @@ let validVoters = filterInvalidVoters(allVoters);
 candidates = runElection(validVoters, candidates);
 
 let winner = getWinner(candidates);
-
+*/
 module.exports = {
   candidatesObjToArray,
   filterInvalidVoters,
   runElection,
   getWinner,
-  winnerMessage
+   winnerMessage
 }
 

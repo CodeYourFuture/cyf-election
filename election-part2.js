@@ -45,10 +45,13 @@ class Election {
         this.validVoters = validVoters;
         this.candidates = candidates;
         this.winner = '';
-    };
+    }
+
     runElection() {
         this.candidates = runElection(this.validVoters, this.candidates);
+         this.getWinner();
     }
+    
     
     getWinner() {
         this.winner = getWinner(this.candidates);
@@ -58,10 +61,6 @@ class Election {
         return winnerMessage(this.winner);
     }
 }
-
-
-
-
 
 // Include your votingPopulation array here.
 let votingPopulation = [new Voter('Jane Finnegan', 19, [1,3]),
@@ -73,12 +72,12 @@ new Voter('Sam MacKinnon', 59, [1,4])
 
 
 // Include your candidates object here.
-let candidates = [
-    new Candidate ('Tamara Faiza',46, [1,1], 'Pizza Party'),
-    new Candidate ('Aylin Duke', 39,[2,2],  'Foam Party'),
-    new Candidate('Clay Roderick',54, [3,4],  'Flat Earth Party'),
-    new Candidate( 'Nour al-Din',32, [4,1], 'Pizza Party')
-];
+let candidates = {
+    1 :new Candidate ('Tamara Faiza',46, [1,1], 'Pizza Party'),
+    2 :new Candidate ('Aylin Duke', 39,[2,2],  'Foam Party'),
+    3 :new Candidate('Clay Roderick',54, [3,4],  'Flat Earth Party'),
+    4 :new Candidate( 'Nour al-Din',32, [4,1], 'Pizza Party')
+};
 
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
