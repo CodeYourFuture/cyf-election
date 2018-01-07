@@ -29,7 +29,7 @@ class Voter {
  */
 
 class Candidate extends Voter {
-	constructor(name,age,votingCard,party) {
+	constructor(name, age, votingCard, party) {
 		super(name,age,votingCard);
         this.party = party;
         this.numVotes= 0;
@@ -44,12 +44,12 @@ class Election {
     constructor(validVoters,candidates) {
         this.validVoters = validVoters;
         this.candidates = candidates;
-        this.winner = '';
+        this.winner = null;
     }
 
     runElection() {
         this.candidates = runElection(this.validVoters, this.candidates);
-         this.getWinner();
+        //  this.getWinner();
     }
     
     
@@ -58,12 +58,13 @@ class Election {
     };
 
     printWinnerMessage() {
-        return winnerMessage(this.winner);
+        return  winnerMessage(this.winner);
     }
 }
 
 // Include your votingPopulation array here.
-let votingPopulation = [new Voter('Jane Finnegan', 19, [1,3]),
+let votingPopulation = [
+new Voter('Jane Finnegan', 19, [1,3]),
 new Voter('Norman Beracha', 35, [3,4]),
 new Voter('Salome Kadek', 22, [2,1,3]),
 new Voter('Wei Li', 19, [1,2]),
