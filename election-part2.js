@@ -19,11 +19,7 @@ class Voter {
     }
 }
 
-let voter1 = new Voter('Jane Finnegan', 19, [1,3]);
-let voter2 = new Voter('Norman Beracha', 35, [3,4]);
-let voter3 = new Voter('Salome Kadek', 22, [2,1,3]);
-let voter4 = new Voter('Wei Li', 19, [1,2]);
-let voter5 = new Voter('Sam MacKinnon', 59, [1,4]);
+
 
 /**
  * 2 - Write a Candidate class modelling a candidate 
@@ -33,9 +29,10 @@ let voter5 = new Voter('Sam MacKinnon', 59, [1,4]);
  */
 
 class Candidate extends Voter {
-	constructor(name,age,votingCard,party,numVotes) {
+	constructor(name,age,votingCard,party) {
 		super(name,age,votingCard);
-		this.party = party;
+        this.party = party;
+        this.numVotes= 0;
 	}
 };
 
@@ -43,7 +40,7 @@ class Candidate extends Voter {
 /**
  * 3 - Write an Election class which models the election.
  */
-var election = class Election {
+class Election {
     constructor(validVoters,candidates) {
         this.validVoters = validVoters;
         this.candidates = candidates;
@@ -64,23 +61,24 @@ var election = class Election {
 
 
 
+
+
 // Include your votingPopulation array here.
-let votingPopulation = [
-    {name: 'Jane Finnegan', age: 19, votingCard: [1,3]},
-    {name: 'Norman Beracha', age: 35, votingCard: [3,4]},
-    {name: 'Salome Kadek', age: 22, votingCard: [2,1,3]},
-    {name: 'Wei Li', age: 19, votingCard: [1,2]},
-    {name: 'Sam MacKinnon', age: 59, votingCard: [1,4]}
+let votingPopulation = [new Voter('Jane Finnegan', 19, [1,3]),
+new Voter('Norman Beracha', 35, [3,4]),
+new Voter('Salome Kadek', 22, [2,1,3]),
+new Voter('Wei Li', 19, [1,2]),
+new Voter('Sam MacKinnon', 59, [1,4])
 ];
 
 
 // Include your candidates object here.
-let candidates = {
-    1: {name: 'Tamara Faiza', age: 46, votingCard: [1,1], party: 'Pizza Party', numVotes: 0},
-    2: {name: 'Aylin Duke', age: 39, votingCard: [2,2], party: 'Foam Party', numVotes: 0},
-    3: {name: 'Clay Roderick', age: 54, votingCard: [3,4], party: 'Flat Earth Party', numVotes: 0},
-    4: {name: 'Nour al-Din', age: 32, votingCard: [4,1], party: 'Pizza Party', numVotes: 0}
-};
+let candidates = [
+    new Candidate ('Tamara Faiza',46, [1,1], 'Pizza Party'),
+    new Candidate ('Aylin Duke', 39,[2,2],  'Foam Party'),
+    new Candidate('Clay Roderick',54, [3,4],  'Flat Earth Party'),
+    new Candidate( 'Nour al-Din',32, [4,1], 'Pizza Party')
+];
 
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
