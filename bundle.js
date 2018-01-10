@@ -97,51 +97,54 @@ let election = new Election(validVoters, candidates);
 /* ---------------------------------- Add Data to HTML start -----------------------------------*/
 
 // Add voters to Voters Table
+const addVoters = votersPopulation => {
+  let votersTable = document.querySelector(".vot-table .voters-table");
 
-let votersTable = document.querySelector(".vot-table .voters-table");
+  for(let i = 0; i < votersPopulation.length; i++) {
+    let votersTableRow = document.createElement("tr");
 
-for(let i = 0; i < votingPopulation.length; i++) {
-  let votersTableRow = document.createElement("tr");
+    let votersDataLeft = document.createElement("td");
+    let votersTextLeft = document.createTextNode(i + 1);
 
-  let votersDataLeft = document.createElement("td");
-  let votersTextLeft = document.createTextNode(i + 1);
+    let votersDataRight = document.createElement("td");
+    let votersTextRight = document.createTextNode(votersPopulation[i].name);
 
-  let votersDataRight = document.createElement("td");
-  let votersTextRight = document.createTextNode(votingPopulation[i].name);
+    votersDataLeft.classList.add("voters-table-left");
+    votersDataRight.classList.add("voters-table-right");
+    votersDataLeft.appendChild(votersTextLeft);
+    votersDataRight.appendChild(votersTextRight);
+    votersTableRow.appendChild(votersDataLeft);
+    votersTableRow.appendChild(votersDataRight);
 
-  votersDataLeft.classList.add("voters-table-left");
-  votersDataRight.classList.add("voters-table-right");
-  votersDataLeft.appendChild(votersTextLeft);
-  votersDataRight.appendChild(votersTextRight);
-  votersTableRow.appendChild(votersDataLeft);
-  votersTableRow.appendChild(votersDataRight);
-
-  votersTable.appendChild(votersTableRow);
+    votersTable.appendChild(votersTableRow);
+  }
 }
+addVoters(votingPopulation);
 
 // Add candidates to Candidates Table
+const addCandidates = candPopulation => {
+  let candidatesTable = document.querySelector(".candidates-table .voters-table");
 
-let candidatesTable = document.querySelector(".candidates-table .voters-table");
+  for(const person in candPopulation) {
+    let candidatesTableRow = document.createElement("tr");
 
-for (const person in candidates) {
-  // console.log(candidates[person].name);
-  let candidatesTableRow = document.createElement("tr");
+    let candidatesDataLeft = document.createElement("td");
+    let candidatesTextLeft = document.createTextNode(candPopulation[person].name);
 
-  let candidatesDataLeft = document.createElement("td");
-  let candidatesTextLeft = document.createTextNode(candidates[person].name);
+    let candidatesDataRight = document.createElement("td");
+    let candidatesTextRight = document.createTextNode(candPopulation[person].age);
 
-  let candidatesDataRight = document.createElement("td");
-  let candidatesTextRight = document.createTextNode(candidates[person].age);
+    candidatesDataLeft.classList.add("voters-table-left");
+    candidatesDataRight.classList.add("voters-table-right");
+    candidatesDataLeft.appendChild(candidatesTextLeft);
+    candidatesDataRight.appendChild(candidatesTextRight);
+    candidatesTableRow.appendChild(candidatesDataLeft);
+    candidatesTableRow.appendChild(candidatesDataRight);
 
-  candidatesDataLeft.classList.add("voters-table-left");
-  candidatesDataRight.classList.add("voters-table-right");
-  candidatesDataLeft.appendChild(candidatesTextLeft);
-  candidatesDataRight.appendChild(candidatesTextRight);
-  candidatesTableRow.appendChild(candidatesDataLeft);
-  candidatesTableRow.appendChild(candidatesDataRight);
-
-  candidatesTable.appendChild(candidatesTableRow);
+    candidatesTable.appendChild(candidatesTableRow);
+  }
 }
+addCandidates(candidates);
 
 /* ---------------------------------- Add Data to HTML end ------------------------------------*/
 
@@ -150,12 +153,12 @@ for (const person in candidates) {
 let runButton = document.querySelector(".run-button");
 let winnerParagraph = document.querySelector(".winner-message p");
 
-
-runButton.addEventListener("click", function handler() {
+let handler = () => {
   election.runElection();
   winnerParagraph.innerHTML = election.printWinnerMessage();
   this.removeEventListener("click", handler);
-});
+}
+runButton.addEventListener("click", handler);
 
 
 /* election.js */
