@@ -53,6 +53,7 @@ class Election {
     }
     
     
+    
     getWinner() {
         this.winner = getWinner(this.candidates);
     };
