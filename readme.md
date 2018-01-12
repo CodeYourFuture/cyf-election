@@ -50,6 +50,8 @@ key represents the ID of the candidate. For example the candidate *Tamara Faiza*
 The `numVotes` property in each candidate object represents the number of votes that candidate received in the election.
 When a new instance of a candidate is created, their `numVotes` property should always be 0.
 
+---------------------------------------
+
 ## Part 1
 
 ### Exercise 1
@@ -97,4 +99,85 @@ because the real election hasn't occurred yet.
 If the previous 5 exercises were completed correctly, you should see a message saying that *Tamara Faiza* has won the election with 3.5 votes. Change 
 *Nour al-Din*'s voting card from `[4,1]` to `[4,3]` and you should notice that a draw has occurred. 
 
+---------------------------------------
 
+## Part 2
+
+This part builds upon the functions you designed in the previous part. You will change your election system to use classes instead of being a loose
+set of functions and objects, however the functionality of the voting system should be the same.
+
+The javascript code for this part should be written in `election-part2.js`.
+
+### Exercise 1
+
+Write a class `Voter` which can be used to create a new voter object. As before, a voter object should have variables for name, age and votingCard.
+After creating the class, use the `new` keyword to initialise all of the voters in the `votingPopulation` array. For example, Jane Finnegan should be
+initialised as `new Voter('Jane Finnegan', 19, [1,3])`.
+
+
+### Exercise 2
+
+Write a class `Candidate` which `extends` voter. Since candidates are voters, the candidate object should also have variables for name, age and votingCard.
+However a candidate has some extended properties: variables storing the party he/she belongs to and the number of votes received.
+
+After creating the class, use the `new` keyword to initialise all of the candidates in the `candidates` object. For example, Tamara Faiza should be
+initialised as `new Candidate('Tamara Faiza', 46, 'Pizza Party', [1,1])`.
+
+> Hint: Recall the `extends` keyword and `super` function from [week 11](https://codeyourfuture.github.io/syllabus-master/js-core-3/week-11/lesson.html).
+
+### Exercise 3
+
+Write a class `Election` which models the election. An election is performed by a group of voters and a group of candidates, so the `Election` class
+should input and store an array of valid voters and an array of candidates, with the people in each array being the same as in part 1. The class should also
+have a `winner` variable used to store the winner.
+
+The `Election` class should also contain three functions: `runElection()`, `getWinner()` and `printWinnerMessage()`. The `runElection()` function should act the same way as in part 1,
+this time altering the voting cards of the `candidates` class variable. The function `getWinner()` should also be as in part 1, this time setting the `winner`
+class variable after the winner is calculated. `printWinnerMessage()` should print a message as before including who won, and how many votes he/she received.
+
+An election should be initialised as `let election = new Election(validVoters, candidates);`
+
+### Exercise 4
+
+Design and write a user interface in HTML that allows users to visit `index.html` and view the list of voters and candidates. Users should be able to
+press a "Run Election" button, which runs the election and prints the winner message on the page.
+
+### Stretch goals
+
+In the `index.html` page, include an input system that allows users to add and remove voters and candidates.
+
+---------------------------------------
+
+## Part 3
+
+The day of the election has come, but the turnout was very low. A json object containing 200 voters and 10 candidates has been provided to you
+through the endpoint at http://www.mocky.io/v2/5a55224b2d000088425b1ed8
+
+This part of your assignment involves linking this data up with the work you have already done.
+
+### Exercise 1
+
+Look at the json object provided at the beginning of part 3, and make sure you understand the structure of the data.
+
+There are two arrays in this object, one called `"candidates"` and one called `"voters"`. These arrays contain objects representing candidates 
+and voters similar to those that you encountered in part 1.
+
+Note in particular that `"candidates"` is an array of objects, not an object of objects like in your implementation. Each candidate object in this array
+has an attribute `id`, which corresponds to the object keys in the `candidates` object used in parts 1 and 2.
+
+### Exercise 2
+
+Write a function `fetchElectionData` which fetches the json data provided to you. You should print the data to make sure that your fetch
+function works.
+
+### Exercise 3
+
+Put your `fetchElectionData` function in `election-part2.js`. After the data has been fetched, change your `votingPopulation` array to be an 
+array of `Voter` objects and your `candidates` object to be composed of `Candidate` objects. This involves using the `new Voter` and `new Candidate`
+declarations just like part 2, but this time there should be 200 voters and 10 candidates.
+
+Note again that `candidates` is given as an array, but your code works with `candidates` as an object. You will need to make the appropriate conversion here.
+
+### Exercise 4
+
+Run your code with the new data you should find the the winner is `Eli Wang`, with `26.5` votes.
