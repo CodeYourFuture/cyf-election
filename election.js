@@ -66,7 +66,7 @@ function getWinner(candidates) {
     
     return candidates[arr.indexOf(max)+1];
       
-     
+        
        }
     
     
@@ -76,9 +76,11 @@ function getWinner(candidates) {
  * he/she received
  */
 function winnerMessage(winner) {
-
-    return winner.name + ' has won the election with ' + winner.numVotes + ' votes!';
-
+    if(winner === null){
+        return "The election was a draw";
+      } else {
+        return winner.name + " has won the election with " + winner.numVotes + " votes!";
+    }
 }
 
 // A sample population of a small number of voters, stored as an array
