@@ -69,7 +69,7 @@ const fetchElectionData = function(){
   .then(() => updateVariables())
   .then(() => createCandidatesList(candidates))
   .then(() => createVotersList(votingPopulation))
-  .then(() => runElectionButton())
+  // .then(() => runElectionButton())
   .catch(err => console.log(err))
 }
 
@@ -140,7 +140,7 @@ const updateVariables = function() {
   allVoters = votingPopulation.concat(candidates); 
   validVoters = filterInvalidVoters(allVoters);
   election = new Election(validVoters, candidates);
-  console.log(election);
+
   // console.log(allVoters);
 }
 
@@ -177,7 +177,7 @@ const createCandidatesList = (candidatesObj) => {
     classC.appendChild(li);
   };
 };
-createCandidatesList(candidates);
+// createCandidatesList(candidates);
 
 //  Create lists of voters 
 const createVotersList = (votersArray) => {
@@ -190,7 +190,8 @@ const createVotersList = (votersArray) => {
     classV.appendChild(li);
   });
 };
-createVotersList(votingPopulation);
+// createVotersList(votingPopulation);
+
 
 
 //Add event listener on button
@@ -201,11 +202,15 @@ let messageP = document.querySelector('.winner-message');
 
 runButton.addEventListener("click", function handler() {
   election.runElection();
+    console.log(candidates);
   // election.getWinner();
   messageP.innerHTML = election.printWinnerMessage();
   this.removeEventListener("click", handler);
+
 });
 };
+
+runElectionButton();
 
 
 },{"./election":2}],2:[function(require,module,exports){
@@ -244,11 +249,11 @@ function filterInvalidVoters(voters) {
 function runElection(voters, candidates) {
   var score = 1;
   voters.forEach(function(voter) {
-    for (var i = 0; i < candidates.length; i++) {
+    for (var i = 1; i <= candidates.length; i++) {
       if (voter.votingCard[0] === i) {
-        candidates[i].numVotes += score;
+        candidates[i-1].numVotes += score;    // candidate 1 in the array will have index 0,thats why
       } else if (voter.votingCard[1] === i) {
-        candidates[i].numVotes += score/2;
+        candidates[i-1].numVotes += score/2;
       }
     }
   })
@@ -291,30 +296,30 @@ function winnerMessage(winner) {
 }
 
 // A sample population of a small number of voters, stored as an array
-let votingPopulation = [
-    {name: 'Jane Finnegan', age: 19, votingCard: [1,3]},
-    {name: 'Norman Beracha', age: 35, votingCard: [3,4]},
-    {name: 'Salome Kadek', age: 22, votingCard: [2,1,3]},
-    {name: 'Wei Li', age: 19, votingCard: [1,2]},
-    {name: 'Sam MacKinnon', age: 59, votingCard: [1,4]}
-];
+// let votingPopulation = [
+//     {name: 'Jane Finnegan', age: 19, votingCard: [1,3]},
+//     {name: 'Norman Beracha', age: 35, votingCard: [3,4]},
+//     {name: 'Salome Kadek', age: 22, votingCard: [2,1,3]},
+//     {name: 'Wei Li', age: 19, votingCard: [1,2]},
+//     {name: 'Sam MacKinnon', age: 59, votingCard: [1,4]}
+// ];
 
 // The election candidates, stored as an object where each object key is the candidate ID, and the object
 // value is the candidate object itself.
-let candidates = {
-    1: {name: 'Tamara Faiza', age: 46, votingCard: [1,1], party: 'Pizza Party', numVotes: 0},
-    2: {name: 'Aylin Duke', age: 39, votingCard: [2,2], party: 'Foam Party', numVotes: 0},
-    3: {name: 'Clay Roderick', age: 54, votingCard: [3,4], party: 'Flat Earth Party', numVotes: 0},
-    4: {name: 'Nour al-Din', age: 32, votingCard: [4,1], party: 'Pizza Party', numVotes: 0}
-};
+// let candidates = {
+//     1: {name: 'Tamara Faiza', age: 46, votingCard: [1,1], party: 'Pizza Party', numVotes: 0},
+//     2: {name: 'Aylin Duke', age: 39, votingCard: [2,2], party: 'Foam Party', numVotes: 0},
+//     3: {name: 'Clay Roderick', age: 54, votingCard: [3,4], party: 'Flat Earth Party', numVotes: 0},
+//     4: {name: 'Nour al-Din', age: 32, votingCard: [4,1], party: 'Pizza Party', numVotes: 0}
+// };
 
-let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
+// let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 
-let validVoters = filterInvalidVoters(allVoters);
+// let validVoters = filterInvalidVoters(allVoters);
 
-candidates = runElection(validVoters, candidates);
+// candidates = runElection(validVoters, candidates);
 
-let winner = getWinner(candidates);
+// let winner = getWinner(candidates);
 
 module.exports = {
   candidatesObjToArray,
