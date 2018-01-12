@@ -25,9 +25,10 @@ const {
  * However they have some extra properties.
  */
 class Candidate extends Voter {
-	constructor(name,age,votingCard,party,numVotes) {
+	constructor(name,age,votingCard,party,id) {
 		super(name,age,votingCard);
 		this.party = party;
+    this.id = id;
 		this.numVotes = 0;
 	}
 };
@@ -45,6 +46,7 @@ class Candidate extends Voter {
 
  	runElection() {
  		this.candidates = runElection(this.validVoters, this.candidates);
+    this.getWinner();
  	}
  	
  	getWinner() {
@@ -57,34 +59,102 @@ class Candidate extends Voter {
 
  }
 
+const fetchElectionData = function(){
+  const dataJSON = 'http://www.mocky.io/v2/5a55224b2d000088425b1ed8';
+  fetch(dataJSON)
+  .then(response => response.json())
+  .then(data => getData(data)) 
+  // .then(() => arrayToObject(candidatesArr,'id'))
+  // .then((candidatesArr) => getCandidatesObj(candidatesArr))
+  .then(() => updateVariables())
+  .then(() => createCandidatesList(candidates))
+  .then(() => createVotersList(votingPopulation))
+  .then(() => runElectionButton())
+  .catch(err => console.log(err))
+}
 
+fetchElectionData();
+
+let votingPopulation = [];
+let candidates = [];
+let allVoters;
+let validVoters;
+let election;
+
+const getData = function(allData) {
+  allData.voters.forEach(function(person) {
+    votingPopulation.push(new Voter(person.name,person.age,person.votingCard));
+  });
+  allData.candidates.forEach(function(person){
+    candidates.push(new Candidate(person.name,person.age,person.votingCard,person.party,person.id));
+  });
+  // console.log(candidates);
+  // console.log(votingPopulation);
+};
+
+// const arrayToObject = (arr, keyField) =>
+//   Object.assign({}, ...arr.map(item => ({[item[keyField]]: item})));
+
+
+// const getCandidatesObj = (candidatesArr) =>
+//   let candidates = arrayToObject(candidatesArr,'id')
+//   console.log(candidates);
+
+
+
+
+
+
+              // CREATE HTML INTERFACE 
 
 // Include your votingPopulation array here.
-let votingPopulation = [
-	new Voter('Jane Finnegan', 19, [1, 3]),
-	new Voter('Norman Beracha', 35, [3, 4]),
-	new Voter('Wei Li',  19, [1, 2]),
-	new Voter('Sam MacKinnon', 59, [1, 4]),
-  new Voter('Salome Kadek', 22, [2,1,3])
-	// new Voter('Clay Roderick', 54,[3, 4]),
-	// new Voter('Nour al-Din', 32,[4, 1])
-];
+// let votingPopulation = [
+// 	new Voter('Jane Finnegan', 19, [1, 3]),
+// 	new Voter('Norman Beracha', 35, [3, 4]),
+// 	new Voter('Wei Li',  19, [1, 2]),
+// 	new Voter('Sam MacKinnon', 59, [1, 4]),
+//   new Voter('Salome Kadek', 22, [2,1,3])
+// ];
 
 
 // Include your candidates array here.
-let candidates = {
-	1: new Candidate('Tamara Faiza', 46, [1,1], 'Pizza Party'),
-	2: new Candidate('Aylin Duke', 39, [2,2], 'Foam Party'),
-	3: new Candidate('Clay Roderick', 54, [3,4], 'Flat Earth Party'),
-	4: new Candidate('Nour al-Din', 32, [4,1], 'Pizza Party')
-};
+// let candidates = {
+// 	1: new Candidate('Tamara Faiza', 46, [1,1], 'Pizza Party'),
+// 	2: new Candidate('Aylin Duke', 39, [2,2], 'Foam Party'),
+// 	3: new Candidate('Clay Roderick', 54, [3,4], 'Flat Earth Party'),
+// 	4: new Candidate('Nour al-Din', 32, [4,1], 'Pizza Party')
+// };
 
 
-let allVoters = votingPopulation.concat(candidatesObjToArray(candidates)); 
+// let allVoters = votingPopulation.concat(candidatesObjToArray(candidates)); 
 
-let validVoters = filterInvalidVoters(allVoters);
 
-let election = new Election(validVoters, candidates);
+// let allVoters = votingPopulation.concat(candidates); 
+
+// let validVoters = filterInvalidVoters(allVoters);
+
+// let election = new Election(validVoters, candidates);
+
+
+const updateVariables = function() {
+  allVoters = votingPopulation.concat(candidates); 
+  validVoters = filterInvalidVoters(allVoters);
+  election = new Election(validVoters, candidates);
+  console.log(election);
+  // console.log(allVoters);
+}
+
+// const createValidVoters = function() {
+//   let validVoters = filterInvalidVoters(allVoters);
+//   console.log(validVoters);
+//   return validVoters;
+// }
+
+// const createElection = function() {
+//   let election = new Election(validVoters, candidates);
+//   console.log(election);
+//   return election;
+
 
 // election.runElection(); // Example of how runElection() can be called.
 // console.log(election.candidates);
@@ -96,16 +166,13 @@ let election = new Election(validVoters, candidates);
 
 
 
-
-              // CREATE HTML INTERFACE 
-
 // Create list of candidates
-function createCandidatesList(candidatesObj) {
+const createCandidatesList = (candidatesObj) => {
   var classC = document.querySelector('.candidates');
   for (candidate in candidatesObj) {
-    var li = document.createElement('li');
+    let li = document.createElement('li');
     li.setAttribute('class', 'candidate');
-    var text = document.createTextNode(candidatesObj[candidate].name);
+    let text = document.createTextNode(candidatesObj[candidate].name);
     li.appendChild(text);
     classC.appendChild(li);
   };
@@ -113,12 +180,12 @@ function createCandidatesList(candidatesObj) {
 createCandidatesList(candidates);
 
 //  Create lists of voters 
-function createVotersList(votersArray) {
-  var classV = document.querySelector('.voters');
+const createVotersList = (votersArray) => {
+  let classV = document.querySelector('.voters');
   votersArray.forEach(function(voter) {
-    var li = document.createElement('li');
+    let li = document.createElement('li');
     li.setAttribute('class', 'voter');
-    var text = document.createTextNode(voter.name);
+    let text = document.createTextNode(voter.name);
     li.appendChild(text);
     classV.appendChild(li);
   });
@@ -127,17 +194,18 @@ createVotersList(votingPopulation);
 
 
 //Add event listener on button
-
-var runButton = document.querySelector('.run');
-var messageP = document.querySelector('.winner-message');
+const runElectionButton = function() {
+let runButton = document.querySelector('.run');
+let messageP = document.querySelector('.winner-message');
 
 
 runButton.addEventListener("click", function handler() {
   election.runElection();
-  election.getWinner();
+  // election.getWinner();
   messageP.innerHTML = election.printWinnerMessage();
   this.removeEventListener("click", handler);
 });
+};
 
 
 },{"./election":2}],2:[function(require,module,exports){
@@ -176,7 +244,7 @@ function filterInvalidVoters(voters) {
 function runElection(voters, candidates) {
   var score = 1;
   voters.forEach(function(voter) {
-    for (var i = 1; i < 5; i++) {
+    for (var i = 0; i < validVoters.length; i++) {
       if (voter.votingCard[0] === i) {
         candidates[i].numVotes += score;
       } else if (voter.votingCard[1] === i) {

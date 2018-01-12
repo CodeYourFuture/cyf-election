@@ -7,6 +7,17 @@ const {
     winnerMessage,
 } = require('./election');
 
+
+const fetchElectionData = function(){
+  const dataJSON = 'http://www.mocky.io/v2/5a55224b2d000088425b1ed8';
+  return fetch(dataJSON)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(err => console.log(err))
+}
+
+fetchElectionData();
+
 /**
  * 1 - Write a Voter class modelling a member of the population who votes in the election.
  */ 
