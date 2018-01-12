@@ -23,7 +23,6 @@
     "jest": "^21.2.1"
   },
   "dependencies": {
-    "browserify": "^15.0.0",
-    "node-fetch": "^1.7.3"
+    "browserify": "^15.0.0"
   }
 }

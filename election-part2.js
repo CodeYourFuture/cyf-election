@@ -9,6 +9,7 @@ const {
     winnerMessage,
 } = require('./election');
 
+
 /**
  * 1 - Write a Voter class modelling a member of the population who votes in the election.
  */
@@ -85,9 +86,11 @@ let validVoters = filterInvalidVoters(allVoters);
 
 let election = new Election(validVoters, candidates);
 
-election.runElection(); // Example of how runElection() can be called.
+// election.runElection(); // Example of how runElection() can be called.
 // console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
 // var button = document.createElement("button");
 // var buttonText = document.createTextNode("Fetch Books");
 // button.appendChild(buttonText);
 // document.body.appendChild(button);
+
+

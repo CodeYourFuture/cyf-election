@@ -1,7 +1,5 @@
-/* BROWSERIFY FUNCTIONS */
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
-/* election-part2.js */
 
 // Importing the functions from what you did in part 1.
 const {
@@ -11,6 +9,7 @@ const {
     getWinner,
     winnerMessage,
 } = require('./election');
+
 
 /**
  * 1 - Write a Voter class modelling a member of the population who votes in the election.
@@ -63,14 +62,25 @@ class Election {
 }
 
 
-// Include your votingPopulation array here.
-let votingPopulation = [
-	new Voter('Jane Finnegan', 19, [1,3]), 
-  new Voter('Norman Beracha', 35, [3,4]), 
-  new Voter('Salome Kadek', 22, [2, 1, 3]), 
-  new Voter('Wei Li', 19, [1,2]), 
-  new Voter('Sam MacKinnon', 59, [1,4])
-];
+//Include your votingPopulation array here.
+let votingPopulation = [];
+
+/*--------------------FETCHING DATA ---------------------------*/
+const fetchElectionData = () => {
+  return fetch("http://www.mocky.io/v2/5a55224b2d000088425b1ed8")
+    .then(response => response.json())
+    .then(data => createVoters(data))
+    .catch(err => console.log(err));
+}
+
+
+const createVoters = data => {
+  data.voters.forEach(voter => {
+      votingPopulation.push(new Voter(voter.name, voter.age, voter.votingCard));
+  });
+}
+
+fetchElectionData().then(() => console.log(votingPopulation.length));
 
 
 // Include your candidates array here.
@@ -87,12 +97,6 @@ let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 let validVoters = filterInvalidVoters(allVoters);
 
 let election = new Election(validVoters, candidates);
-
-// election.runElection(); // Example of how runElection() can be called.
-// console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
-
-
-
 
 /* ---------------------------------- Add Data to HTML start -----------------------------------*/
 
@@ -153,15 +157,21 @@ addCandidates(candidates);
 let runButton = document.querySelector(".run-button");
 let winnerParagraph = document.querySelector(".winner-message p");
 
-let handler = () => {
+runButton.addEventListener("click", function handler() {
   election.runElection();
   winnerParagraph.innerHTML = election.printWinnerMessage();
   this.removeEventListener("click", handler);
-}
-runButton.addEventListener("click", handler);
+});
+
+// let handler = () => {
+//   election.runElection();
+//   winnerParagraph.innerHTML = election.printWinnerMessage();
+//   this.removeEventListener("click", handler);
+// }
+// runButton.addEventListener("click", handler);
 
 
-/* election.js */
+
 
 },{"./election":2}],2:[function(require,module,exports){
 /**
@@ -285,11 +295,3 @@ module.exports = {
 }
 
 },{}]},{},[1]);
-
-// var button = document.createElement("button");
-// var buttonText = document.createTextNode("Fetch Books");
-// button.appendChild(buttonText);
-// document.body.appendChild(button);
-// console.log(document.body)
-
-// allVoters.forEach(voter => console.log(voter.name));
