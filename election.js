@@ -32,7 +32,7 @@ function runElection(voters, candidates) {
   var voteScore = 1;
 
   voters.forEach(function(voter){
-    for(var person = 1; person <= 4; person++){
+    for(var person = 1; person <= candidates.length; person++){
       if(voter.votingCard[0] === person){
         candidates[person].numVotes += voteScore;
       } else if(voter.votingCard[1] === person){

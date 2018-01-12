@@ -28,10 +28,11 @@ class Voter {
  */
 
 class Candidate extends Voter {
-	constructor(name, age, votingCard, party, numVotes) {
+	constructor(name, age, votingCard, party, id) {
 		super(name, age, votingCard)
 		this.party = party
 		this.numVotes = 0
+    this.id = id
 	}
 }
 
@@ -65,38 +66,51 @@ class Election {
 //Include your votingPopulation array here.
 let votingPopulation = [];
 
+// Include your candidates array here.
+let candidates = [];
+
+let allVoters, validVoters,  election;
+
 /*--------------------FETCHING DATA ---------------------------*/
 const fetchElectionData = () => {
   return fetch("http://www.mocky.io/v2/5a55224b2d000088425b1ed8")
     .then(response => response.json())
-    .then(data => createVoters(data))
+    .then(data => addPeopleToElection(data))
+    .then(getAllVoters)
+    // .then(() => console.log(allVoters))
+    .then(getValidVoters)
+    // .then(() => console.log(validVoters))
+    .then(createElection)
+    .then(votersPopulation => addVoters(votingPopulation))
+    .then(candPopulation => addCandidates(candidates))
+    .then(goElection)
     .catch(err => console.log(err));
 }
 
 
-const createVoters = data => {
-  data.voters.forEach(voter => {
-      votingPopulation.push(new Voter(voter.name, voter.age, voter.votingCard));
+const addPeopleToElection = data => {
+  data.voters.forEach(person => {
+    votingPopulation.push(new Voter(person.name, person.age, person.votingCard));
+  });
+  data.candidates.forEach(person => {
+    candidates.push(new Candidate(person.name, person.age, person.votingCard, person.party, person.id));
   });
 }
 
-fetchElectionData().then(() => console.log(votingPopulation.length));
 
+const getAllVoters = () => {
+  allVoters = votingPopulation.concat(candidates);
+}
 
-// Include your candidates array here.
-let candidates = {
-	1: new Candidate('Tamara Faiza', 46, [1,1], 'Pizza Party'),
-	2: new Candidate('Aylin Duke', 39, [2,2], 'Foam Party'),
-	3: new Candidate('Clay Roderick', 54, [3,4], 'Flat Earth Party'),
-	4: new Candidate('Nour al-Din', 32, [4,1], 'Pizza Party')
+const getValidVoters = () => {
+  validVoters = filterInvalidVoters(allVoters);
+}
+
+const createElection = () => {
+  election = new Election(validVoters, candidates);
 }
 
 
-let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
-
-let validVoters = filterInvalidVoters(allVoters);
-
-let election = new Election(validVoters, candidates);
 
 /* ---------------------------------- Add Data to HTML start -----------------------------------*/
 
@@ -123,7 +137,6 @@ const addVoters = votersPopulation => {
     votersTable.appendChild(votersTableRow);
   }
 }
-addVoters(votingPopulation);
 
 // Add candidates to Candidates Table
 const addCandidates = candPopulation => {
@@ -148,20 +161,23 @@ const addCandidates = candPopulation => {
     candidatesTable.appendChild(candidatesTableRow);
   }
 }
-addCandidates(candidates);
+
 
 /* ---------------------------------- Add Data to HTML end ------------------------------------*/
 
 
 /* ----------- Run Election ----------- */
-let runButton = document.querySelector(".run-button");
-let winnerParagraph = document.querySelector(".winner-message p");
+const goElection = () => {
+  let runButton = document.querySelector(".run-button");
+  let winnerParagraph = document.querySelector(".winner-message p");
 
-runButton.addEventListener("click", function handler() {
-  election.runElection();
-  winnerParagraph.innerHTML = election.printWinnerMessage();
-  this.removeEventListener("click", handler);
-});
+  runButton.addEventListener("click", function handler() {
+    election.runElection();
+    winnerParagraph.innerHTML = election.printWinnerMessage();
+    this.removeEventListener("click", handler);
+  });
+}
+
 
 // let handler = () => {
 //   election.runElection();
@@ -170,6 +186,7 @@ runButton.addEventListener("click", function handler() {
 // }
 // runButton.addEventListener("click", handler);
 
+fetchElectionData();
 
 
 
@@ -208,11 +225,11 @@ function runElection(voters, candidates) {
   var voteScore = 1;
 
   voters.forEach(function(voter){
-    for(var person = 1; person <= 4; person++){
+    for(var person = 1; person <= candidates.length; person++){
       if(voter.votingCard[0] === person){
-        candidates[person].numVotes += voteScore;
+        candidates[person -1].numVotes += voteScore;
       } else if(voter.votingCard[1] === person){
-        candidates[person].numVotes += voteScore / 2;
+        candidates[person -1].numVotes += voteScore / 2;
       }
     }
   });
