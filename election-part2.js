@@ -86,13 +86,73 @@ let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
 
-console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+// console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+
+
+
+
+// adding voters and candidates
 
 
 
 
 
-////////////////////////////////////////////
+const addVoters = votingPop => {
+  let votersTable = document.querySelector(".voting-table .voters-table");
+
+  for(let voter = 0; voter < votingPop.length; voter++) {
+    let votersTableRow = document.createElement("tr");
+
+    let voterId = document.createElement("td");
+    let votersIdTextNode = document.createTextNode(voter + 1);
+
+    let votersName = document.createElement("td");
+    let votersTextNode = document.createTextNode(votingPop[voter].name);
+
+    
+    voterId.appendChild(votersIdTextNode);
+    votersName.appendChild(votersTextNode);
+    votersTableRow.appendChild(voterId);
+    votersTableRow.appendChild(votersName);
+
+    votersTable.appendChild(votersTableRow);
+  }
+}
+addVoters(votingPopulation);
+
+
+// candidates
+const addCandidates = allcandidates => {
+  let candidatesTable = document.querySelector(".candidates-table .voters-table");
+
+  for(const candid in allcandidates) {
+    let candidTableRow = document.createElement("tr");
+    let candidateName = document.createElement("td");
+    let candidatesNameTextNode = document.createTextNode(allcandidates[candid].name);
+
+    let candidatesAge= document.createElement("td");
+    let candidatesAgeTextNode = document.createTextNode(allcandidates[candid].age);
+
+
+    candidateName.appendChild(candidatesNameTextNode);
+    candidatesAge.appendChild(candidatesAgeTextNode);
+    candidTableRow.appendChild(candidateName);
+    candidTableRow.appendChild(candidatesAge);
+
+    candidatesTable.appendChild(candidTableRow);
+  }
+}
+addCandidates(candidates);
 
 
 
+/* ----------- Running the Election ----------- */
+
+let runButton = document.querySelector(".run-button");
+let winnerParagraph = document.querySelector(".winner-message p");
+
+runButton.addEventListener("click", function listener() {
+  election.runElection();
+  winnerParagraph.innerHTML = election.printWinnerMessage();
+  this.removeEventListener("click", listener);
+});
