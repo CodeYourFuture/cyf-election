@@ -73,7 +73,7 @@ let allVoters, validVoters,  election;
 
 /*--------------------FETCHING DATA ---------------------------*/
 const fetchElectionData = () => {
-  return fetch("http://www.mocky.io/v2/5a55224b2d000088425b1ed8")
+  return fetch("https://www.mocky.io/v2/5a55224b2d000088425b1ed8")
     .then(response => response.json())
     .then(data => addPeopleToElection(data))
     .then(getAllVoters)
