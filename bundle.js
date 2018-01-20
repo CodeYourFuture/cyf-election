@@ -60,7 +60,7 @@ class Candidate extends Voter {
  }
 
 const fetchElectionData = function(){
-  const dataJSON = 'http://www.mocky.io/v2/5a55224b2d000088425b1ed8';
+  const dataJSON = 'https://www.mocky.io/v2/5a55224b2d000088425b1ed8';
   fetch(dataJSON)
   .then(response => response.json())
   .then(data => getData(data)) 
