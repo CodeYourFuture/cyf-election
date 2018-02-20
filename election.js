@@ -6,7 +6,10 @@
  * 1 - Convert candidates object to array
  */
 function candidatesObjToArray(candidates) {
-
+    var arrOfKeys = Object.keys(candidates);
+    var arrOfCandidates = arrOfKeys.map(function (key) { return candidates[key]; });
+    //console.log(arrOfCandidates);
+    return arrOfCandidates;
 }
 
 /**
