@@ -26,10 +26,14 @@ function filterInvalidVoters(allVoters) {
  * the right vote counts for half of the left vote.
  */
 function runElection(validVoters, candidates) {
-    votes = [];
+    /* votes = [];
     for (var i = 0; i < validVoters.length; i++) {
         votes.push(validVoters[i].votingCard);
-    }
+    } */
+    votes = [];
+    validVoters.forEach(function (item) {
+        votes.push(item.votingCard)
+    })
     for (var i = 0; i < votes.length; i++) { //loop through vote array
         for (var j = 1; j < 5; j++) { //loop through candidates array
             if (votes[i][0] === j)
@@ -46,9 +50,19 @@ function runElection(validVoters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
+    finalVotes = [];
+    for (var key in candidates) {
+        finalVotes.push(candidates[key].numVotes);
+    }
+    console.log(finalVotes)
+    var min = Math.min(...finalVotes);
+    var max = Math.max(...finalVotes);
+    if (min === max) return null //if all candidates numVotes is equal so we have no winner
+    else
+        return candidates[Object.keys(candidates)[finalVotes.indexOf(max)]]
+        //horrific line above: the candidate connected to max based on key object, needs refactor!
 
 }
-
 /**
  * 5 - Return a message including the name of the winner, and how many votes
  * he/she received
@@ -79,12 +93,13 @@ let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 //console.log(allVoters);
 
 let validVoters = filterInvalidVoters(allVoters);
-//console.log(validVoters,"validdddddddddd")
+console.log(validVoters,"validdddddddddd")
 
 candidates = runElection(validVoters, candidates);
-//console.log(candidates);
+console.log(candidates);
 
 let winner = getWinner(candidates);
+console.log("and the winner is: ",winner)
 
 module.exports = {
   candidatesObjToArray,
