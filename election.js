@@ -68,7 +68,7 @@ function getWinner(candidates) {
 function winnerMessage(winner) {
     var winner = getWinner(candidates)
     if (winner !== null) {
-        var mes = "Congratulation to " + winner.name + "who has achieved " + winner.numVotes + " votes";
+        var mes = winner.name + " has won the election with " + winner.numVotes + " votes.";
         return mes;
     }
     else console.log("The election was a draw");
@@ -96,13 +96,13 @@ let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 //console.log(allVoters);
 
 let validVoters = filterInvalidVoters(allVoters);
-console.log(validVoters,"validdddddddddd")
+//console.log(validVoters,"validdddddddddd")
 
 candidates = runElection(validVoters, candidates);
-console.log(candidates);
+//console.log(candidates);
 
 let winner = getWinner(candidates);
-console.log("and the winner is: ",winner)
+//console.log("and the winner is: ",winner)
 
 console.log(winnerMessage());
 
