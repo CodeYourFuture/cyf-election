@@ -8,15 +8,17 @@
 function candidatesObjToArray(candidates) {
     var arrOfKeys = Object.keys(candidates);
     var arrOfCandidates = arrOfKeys.map(function (key) { return candidates[key]; });
-    //console.log(arrOfCandidates);
     return arrOfCandidates;
 }
 
 /**
  * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
 */
-function filterInvalidVoters(voters) {
 
+function filterInvalidVoters(allVoters) {
+    return allVoters.filter(function (item) {
+        return item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]
+    })
 }
 
 /**
@@ -63,9 +65,10 @@ let candidates = {
 };
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
+console.log(allVoters);
 
 let validVoters = filterInvalidVoters(allVoters);
-
+console.log(validVoters)
 candidates = runElection(validVoters, candidates);
 
 let winner = getWinner(candidates);
