@@ -54,21 +54,21 @@ function getWinner(candidates) {
     for (var key in candidates) {
         finalVotes.push(candidates[key].numVotes);
     }
-    console.log(finalVotes)
     var min = Math.min(...finalVotes);
     var max = Math.max(...finalVotes);
     if (min === max) return null //if all candidates numVotes is equal so we have no winner
     else
         return candidates[Object.keys(candidates)[finalVotes.indexOf(max)]]
-        //horrific line above: the candidate connected to max based on key object, needs refactor!
-
+    //horrific line above: the candidate connected to max based on key object, needs refactor!
 }
 /**
  * 5 - Return a message including the name of the winner, and how many votes
  * he/she received
  */
 function winnerMessage(winner) {
-
+    var winner = getWinner(candidates)
+    var mes = "Congratulation to " + winner.name + "who has achieved " + winner.numVotes + " votes";
+    return mes;
 }
 
 // A sample population of a small number of voters, stored as an array
@@ -100,6 +100,8 @@ console.log(candidates);
 
 let winner = getWinner(candidates);
 console.log("and the winner is: ",winner)
+
+console.log(winnerMessage());
 
 module.exports = {
   candidatesObjToArray,
