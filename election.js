@@ -27,7 +27,7 @@ function runElection(voters, candidates) {
 /**
  * 4 - After an election has been run, return the winner
  *
- * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
+ * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3.5}
  */
 function getWinner(candidates) {
 
