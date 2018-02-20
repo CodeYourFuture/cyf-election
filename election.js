@@ -67,8 +67,11 @@ function getWinner(candidates) {
  */
 function winnerMessage(winner) {
     var winner = getWinner(candidates)
-    var mes = "Congratulation to " + winner.name + "who has achieved " + winner.numVotes + " votes";
-    return mes;
+    if (winner !== null) {
+        var mes = "Congratulation to " + winner.name + "who has achieved " + winner.numVotes + " votes";
+        return mes;
+    }
+    else console.log("The election was a draw");
 }
 
 // A sample population of a small number of voters, stored as an array
