@@ -25,10 +25,21 @@ function filterInvalidVoters(allVoters) {
  * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
  * the right vote counts for half of the left vote.
  */
-function runElection(voters, candidates) {
-
+function runElection(validVoters, candidates) {
+    votes = [];
+    for (var i = 0; i < validVoters.length; i++) {
+        votes.push(validVoters[i].votingCard);
+    }
+    for (var i = 0; i < votes.length; i++) { //loop through vote array
+        for (var j = 1; j < 5; j++) { //loop through candidates array
+            if (votes[i][0] === j)
+                candidates[j].numVotes += 1;
+            if (votes[i][1] === j)
+                candidates[j].numVotes += 0.5
+        }
+    }
+    return candidates;
 }
-
 /**
  * 4 - After an election has been run, return the winner
  *
@@ -65,11 +76,13 @@ let candidates = {
 };
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
-console.log(allVoters);
+//console.log(allVoters);
 
 let validVoters = filterInvalidVoters(allVoters);
-console.log(validVoters)
+//console.log(validVoters,"validdddddddddd")
+
 candidates = runElection(validVoters, candidates);
+//console.log(candidates);
 
 let winner = getWinner(candidates);
 
