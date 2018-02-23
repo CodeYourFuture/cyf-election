@@ -61,12 +61,12 @@ function getWinner(candidates) {
     var maxDuplicate = []
     for (var i = 0; i < finalVotes.length; i++) {
         if (finalVotes[i] === max)
-             maxDuplicate.push(finalVotes[i]);
+            maxDuplicate.push(finalVotes[i]);
     }
     if (maxDuplicate.length > 1) return null;
     else
         return candidates[Object.keys(candidates)[finalVotes.indexOf(max)]]
-        //horrific line above:returns the candidate connected to max based on key object, needs refactor!
+    //horrific line above:returns the candidate connected to max based on key object, needs refactor!
 }
 /**
  * 5 - Return a message including the name of the winner, and how many votes
@@ -106,7 +106,7 @@ let validVoters = filterInvalidVoters(allVoters);
 //console.log(validVoters,"validdddddddddd")
 
 candidates = runElection(validVoters, candidates);
-console.log(candidates);
+//console.log(candidates);
 
 let winner = getWinner(candidates);
 //console.log("and the winner is: ",winner)
