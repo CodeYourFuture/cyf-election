@@ -75,7 +75,7 @@ function getWinner(candidates) {
 function winnerMessage(winner) {
     var winner = getWinner(candidates)
     if (winner !== null) {
-        var mes = winner.name + " has won the election with " + winner.numVotes + " votes.";
+        var mes = winner.name + " has won the election with " + winner.numVotes + " votes!";
         return mes;
     }
     else return "The election was a draw";
