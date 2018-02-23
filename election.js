@@ -96,7 +96,7 @@ let candidates = {
     1: { name: 'Tamara Faiza', age: 46, votingCard: [1, 1], party: 'Pizza Party', numVotes: 0 },
     2: { name: 'Aylin Duke', age: 39, votingCard: [2, 2], party: 'Foam Party', numVotes: 0 },
     3: { name: 'Clay Roderick', age: 54, votingCard: [3, 4], party: 'Flat Earth Party', numVotes: 0 },
-    4: { name: 'Nour al-Din', age: 32, votingCard: [4, 3], party: 'Pizza Party', numVotes: 0 }
+    4: { name: 'Nour al-Din', age: 32, votingCard: [4, 1], party: 'Pizza Party', numVotes: 0 }
 };
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
