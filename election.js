@@ -66,7 +66,7 @@ function getWinner(candidates) {
     if (maxDuplicate.length > 1) return null;
     else
         return candidates[Object.keys(candidates)[finalVotes.indexOf(max)]]
-    //horrific line above:returns the candidate connected to max based on key object, needs refactor!
+    //horrible line above:returns the candidate connected to max based on key object, needs refactor!
 }
 /**
  * 5 - Return a message including the name of the winner, and how many votes

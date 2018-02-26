@@ -40,6 +40,24 @@ new Candidate('Nour al-Din',32, 'Pizza Party', [4, 1]);
 /**
  * 3 - Write an Election class which models the election.
  */
+class Election{
+    constructor(validVoters,candidates,winner){
+       this.validVoters=validVoters;
+       this.candidates=candidates;
+       this.winner=winner;
+    }
+    runElection() {
+        // altering the voting cards of the candidates class variable
+
+    } getWinner() {
+        //setting the winner class variable after the winner is calculated
+
+    } printWinnerMessage() {
+        // should print a message as before including who won, 
+        //and how many votes he/she received
+        
+    }
+}
 
 // Include your votingPopulation array here.
 let votingPopulation = [];
