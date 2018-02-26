@@ -27,7 +27,16 @@ new Vote('Sam MacKinnon', 59, [1, 4]);
  * 2 - Write a Candidate class modelling a candidate in the election. Candidates are also voters (they can vote for themselves, or anyone else).
  * However they have some extra properties.
  */
-
+class Candidate extends Voter {
+    constructor(party,numVotes) {
+    this.party = party;
+    this.numVotes = numVotes;
+    }
+}
+new Candidate('Tamara Faiza', 46, 'Pizza Party', [1,1]);
+new Candidate('Aylin Duke',39,'Foam Party', [2, 2]);
+new Candidate( 'Clay Roderick',54,'Flat Earth Party',[3, 4]);
+new Candidate('Nour al-Din',32, 'Pizza Party', [4, 1]);
 /**
  * 3 - Write an Election class which models the election.
  */
