@@ -17,7 +17,7 @@ class voter {
         this.votingCard = votingCard;
     }
 }
-new new Voter('Jane Finnegan', 19, [1, 3]);
+new Voter('Jane Finnegan', 19, [1, 3]);
 new Voter('Norman Beracha', 35, [3, 4]);
 new Voter('Salome Kadek', 22, [2, 1, 3]);
 new Vote('Wei Li', 19, [1, 2]);
