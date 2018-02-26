@@ -106,7 +106,7 @@ let validVoters = filterInvalidVoters(allVoters);
 //console.log(validVoters,"validdddddddddd")
 
 candidates = runElection(validVoters, candidates);
-//console.log(candidates);
+console.log(candidates);
 
 let winner = getWinner(candidates);
 //console.log("and the winner is: ",winner)
