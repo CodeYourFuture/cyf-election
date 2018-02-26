@@ -28,7 +28,8 @@ new Vote('Sam MacKinnon', 59, [1, 4]);
  * However they have some extra properties.
  */
 class Candidate extends Voter {
-    constructor(party,numVotes) {
+    constructor(name, age, votingCard,party,numVotes) {
+    super(name, age, votingCard);
     this.party = party;
     this.numVotes = numVotes;
     }
