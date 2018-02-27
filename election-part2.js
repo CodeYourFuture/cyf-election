@@ -10,7 +10,7 @@ const {
 /**
  * 1 - Write a Voter class modelling a member of the population who votes in the election.
  */
-class voter {
+class Voter {
     constructor(name, age, votingCard) {
         this.name = name;
         this.age = age;
@@ -21,8 +21,8 @@ let votingPopulation = [
     new Voter('Jane Finnegan', 19, [1, 3]),
     new Voter('Norman Beracha', 35, [3, 4]),
     new Voter('Salome Kadek', 22, [2, 1, 3]),
-    new Vote('Wei Li', 19, [1, 2]),
-    new Vote('Sam MacKinnon', 59, [1, 4])
+    new Voter('Wei Li', 19, [1, 2]),
+    new Voter('Sam MacKinnon', 59, [1, 4])
 ]
 
 
@@ -43,6 +43,7 @@ let Candidates=[
     new Candidate( 'Clay Roderick',54,'Flat Earth Party',[3, 4]),
     new Candidate('Nour al-Din',32, 'Pizza Party', [4, 1])
 ]
+
 
 /**
  * 3 - Write an Election class which models the election.
@@ -65,6 +66,8 @@ class Election{
         
     }
 }
+
+ 
 
 // Include your votingPopulation array here.
 let votingPopulation = [];
