@@ -70,11 +70,11 @@ class Election{
  
 
 // Include your votingPopulation array here.
-let votingPopulation = [];
+//let votingPopulation = [];
 
 
 // Include your candidates object here.
-let candidates = {};
+//let candidates = {};
 
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
