@@ -17,11 +17,14 @@ class voter {
         this.votingCard = votingCard;
     }
 }
-new Voter('Jane Finnegan', 19, [1, 3]);
-new Voter('Norman Beracha', 35, [3, 4]);
-new Voter('Salome Kadek', 22, [2, 1, 3]);
-new Vote('Wei Li', 19, [1, 2]);
-new Vote('Sam MacKinnon', 59, [1, 4]);
+let votingPopulation = [
+    new Voter('Jane Finnegan', 19, [1, 3]),
+    new Voter('Norman Beracha', 35, [3, 4]),
+    new Voter('Salome Kadek', 22, [2, 1, 3]),
+    new Vote('Wei Li', 19, [1, 2]),
+    new Vote('Sam MacKinnon', 59, [1, 4])
+]
+
 
 /**
  * 2 - Write a Candidate class modelling a candidate in the election. Candidates are also voters (they can vote for themselves, or anyone else).
@@ -34,10 +37,13 @@ class Candidate extends Voter {
     this.numVotes = numVotes;
     }
 }
-new Candidate('Tamara Faiza', 46, 'Pizza Party', [1,1]);
-new Candidate('Aylin Duke',39,'Foam Party', [2, 2]);
-new Candidate( 'Clay Roderick',54,'Flat Earth Party',[3, 4]);
-new Candidate('Nour al-Din',32, 'Pizza Party', [4, 1]);
+let Candidates=[
+    new Candidate('Tamara Faiza', 46, 'Pizza Party', [1,1]),
+    new Candidate('Aylin Duke',39,'Foam Party', [2, 2]),
+    new Candidate( 'Clay Roderick',54,'Flat Earth Party',[3, 4]),
+    new Candidate('Nour al-Din',32, 'Pizza Party', [4, 1])
+]
+
 /**
  * 3 - Write an Election class which models the election.
  */
