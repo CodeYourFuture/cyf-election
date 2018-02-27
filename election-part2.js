@@ -37,7 +37,7 @@ class Candidate extends Voter {
     this.numVotes = numVotes;
     }
 }
-let Candidates=[
+let candidates=[
     new Candidate('Tamara Faiza', 46, 'Pizza Party', [1,1]),
     new Candidate('Aylin Duke',39,'Foam Party', [2, 2]),
     new Candidate( 'Clay Roderick',54,'Flat Earth Party',[3, 4]),
