@@ -49,10 +49,10 @@ let candidates=[
  * 3 - Write an Election class which models the election.
  */
 class Election{
-    constructor(validVoters,candidates,winner){
+    constructor(validVoters,candidates){
        this.validVoters=validVoters;
        this.candidates=candidates;
-       this.winner=winner;
+       this.winner = 'winner has not been chosen yet';
     }
     runElection() {
         // altering the voting cards of the candidates class variable
