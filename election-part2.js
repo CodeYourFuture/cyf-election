@@ -31,43 +31,49 @@ let votingPopulation = [
  * However they have some extra properties.
  */
 class Candidate extends Voter {
-    constructor(name, age, votingCard,party,numVotes) {
-    super(name, age, votingCard);
-    this.party = party;
-    this.numVotes = numVotes;
+    constructor(name, age, votingCard, party, numVotes) {
+        super(name, age, votingCard);
+        this.party = party;
+        this.numVotes = numVotes;
     }
 }
-let candidates=[
-    new Candidate('Tamara Faiza', 46, 'Pizza Party', [1,1]),
-    new Candidate('Aylin Duke',39,'Foam Party', [2, 2]),
-    new Candidate( 'Clay Roderick',54,'Flat Earth Party',[3, 4]),
-    new Candidate('Nour al-Din',32, 'Pizza Party', [4, 1])
-]
+let candidates = {
+    1: new Candidate('Tamara Faiza', 46, 'Pizza Party', [1, 1]),
+    2: new Candidate('Aylin Duke', 39, 'Foam Party', [2, 2]),
+    3: new Candidate('Clay Roderick', 54, 'Flat Earth Party', [3, 4]),
+    4: new Candidate('Nour al-Din', 32, 'Pizza Party', [4, 1])
+}
+
 
 
 /**
  * 3 - Write an Election class which models the election.
  */
-class Election{
-    constructor(validVoters,candidates){
-       this.validVoters=validVoters;
-       this.candidates=candidates;
-       this.winner = 'winner has not been chosen yet';
+class Election {
+    constructor(validVoters, candidates) {
+        this.validVoters = validVoters;
+        this.candidates = candidates;
+        this.winner = 'winner has not been chosen yet';
     }
     runElection() {
         // altering the voting cards of the candidates class variable
+        this.candidates = runElection(this.validVoters, this.candidates)
 
     } getWinner() {
         //setting the winner class variable after the winner is calculated
+        this.winner = getWinner(this.candidates);
 
     } printWinnerMessage() {
         // should print a message as before including who won, 
         //and how many votes he/she received
-        
-    }
+        if (this.winner === null)
+            {return "The election was a draw";}
+        return this.winner.name + " has won the election with " + this.winner.numVotes + " votes!";
+    }   
+       
 }
 
- 
+
 
 // Include your votingPopulation array here.
 //let votingPopulation = [];

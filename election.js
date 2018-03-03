@@ -16,9 +16,8 @@ function candidatesObjToArray(candidates) {
 */
 
 function filterInvalidVoters(allVoters) {
-    return allVoters.filter(function (item) {
-        return item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]
-    })
+    return allVoters.filter(item => item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]
+    )
 }
 
 /**
@@ -26,10 +25,6 @@ function filterInvalidVoters(allVoters) {
  * the right vote counts for half of the left vote.
  */
 function runElection(validVoters, candidates) {
-    /* votes = [];
-    for (var i = 0; i < validVoters.length; i++) {
-        votes.push(validVoters[i].votingCard);
-    } */
     votes = [];
     validVoters.forEach(function (item) {
         votes.push(item.votingCard)
@@ -50,23 +45,16 @@ function runElection(validVoters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
-    finalVotes = [];
-    for (var key in candidates) {
-        finalVotes.push(candidates[key].numVotes);
-    }
-    /* var min = Math.min(...finalVotes);
-    var max = Math.max(...finalVotes);
-    if (min === max) return null //if all candidates numVotes is equal so we have no winner */
-    var max = Math.max(...finalVotes);
-    var maxDuplicate = []
-    for (var i = 0; i < finalVotes.length; i++) {
-        if (finalVotes[i] === max)
-            maxDuplicate.push(finalVotes[i]);
-    }
-    if (maxDuplicate.length > 1) return null;
-    else
-        return candidates[Object.keys(candidates)[finalVotes.indexOf(max)]]
-    //horrible line above:returns the candidate connected to max based on key object, needs refactor!
+    let winner = {numVotes:0};
+    Object.values(candidates).forEach(function (item) {
+        if (item.numVotes > winner.numVotes) {
+            winner = item;
+        }
+        else if (item.numVotes === winner.numVotes) {
+            return null
+        }
+    })
+    return winner;
 }
 /**
  * 5 - Return a message including the name of the winner, and how many votes
