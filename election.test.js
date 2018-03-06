@@ -56,6 +56,16 @@ test('getWinner should return the winning candidate', () => {
         numVotes: 3.5,
     })
 })
+test('getWinner should return the winning candidate', () => {
+    const candidatesAfterElection = {
+        1: {name:"Tamara Faiza",age:46,votingCard:[1,1],party:"Pizza Party",numVotes:3.0},
+        2: {name:"Aylin Duke",age:39,votingCard:[2,2],party:"Foam Party",numVotes:0.5},
+        3: {name:"Clay Roderick",age:54,votingCard:[3,4],party:"Flat Earth Party",numVotes:3.0},
+        4: {name:"Nour al-Din",age:32,votingCard:[4,1],party:"Pizza Party",numVotes:2.5}
+    };
+
+    expect(getWinner(candidatesAfterElection)).toEqual(null)
+})
 
 test('winnerMessage should return a message with the name of the winner and number of votes received', () => {
     const winner = {

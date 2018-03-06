@@ -45,15 +45,22 @@ function runElection(validVoters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
-    let winner = {numVotes:0};
+    let winner = {numVotes:0.0};
+  try{
     Object.values(candidates).forEach(function (item) {
-        if (item.numVotes > winner.numVotes) {
+        /* console.log(item.name,item.numVotes);
+        console.log(winner.name,winner.numVotes);
+        console.log(); */
+        if (item.numVotes == winner.numVotes) {
+            throw "Duplicate";
+        }
+       else   if (item.numVotes > winner.numVotes) {
             winner = item;
         }
-        else if (item.numVotes === winner.numVotes) {
-            return null
-        }
     })
+  }catch(error){
+      return null;
+  }
     return winner;
 }
 /**
@@ -84,7 +91,7 @@ let candidates = {
     1: { name: 'Tamara Faiza', age: 46, votingCard: [1, 1], party: 'Pizza Party', numVotes: 0 },
     2: { name: 'Aylin Duke', age: 39, votingCard: [2, 2], party: 'Foam Party', numVotes: 0 },
     3: { name: 'Clay Roderick', age: 54, votingCard: [3, 4], party: 'Flat Earth Party', numVotes: 0 },
-    4: { name: 'Nour al-Din', age: 32, votingCard: [4, 1], party: 'Pizza Party', numVotes: 0 }
+    4: { name: 'Nour al-Din', age: 32, votingCard: [4, 3], party: 'Pizza Party', numVotes: 0 }
 };
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));

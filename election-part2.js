@@ -66,11 +66,10 @@ class Election {
     } printWinnerMessage() {
         // should print a message as before including who won, 
         //and how many votes he/she received
-        if (this.winner === null)
-            {return "The election was a draw";}
+        if (this.winner === null) { return "The election was a draw"; }
         return this.winner.name + " has won the election with " + this.winner.numVotes + " votes!";
-    }   
-       
+    }
+
 }
 
 
@@ -82,13 +81,17 @@ class Election {
 // Include your candidates object here.
 //let candidates = {};
 
+window.onload = function () {
+    let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 
-let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
+    let validVoters = filterInvalidVoters(allVoters);
 
-let validVoters = filterInvalidVoters(allVoters);
+    let election = new Election(validVoters, candidates);
 
-let election = new Election(validVoters, candidates);
+    election.runElection(); // Example of how runElection() can be called.
 
-election.runElection(); // Example of how runElection() can be called.
+    console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
 
-console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
+}
+
+
