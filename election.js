@@ -16,8 +16,13 @@ function candidatesObjToArray(candidates) {
 /**
  * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
 */
-function filterInvalidVoters(voters) {
-
+function filterInvalidVoters(allVoters) {
+    var arrayVoters = allVoters.filter(function (item) {
+        if (item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]) {
+            return item;
+        };
+    });
+    return arrayVoters;
 }
 
 /**
