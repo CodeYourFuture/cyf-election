@@ -52,7 +52,7 @@ function getWinner(candidates) {
     var notWin = 0;
     var winner = {};
     Object.values(candidates).forEach(function (item) {
-        if (item.numVotes > winVotes) {
+        if (item.numVotes >= winVotes) {
             notWin = winVotes;
             winVotes = item.numVotes;
             winner = item;
