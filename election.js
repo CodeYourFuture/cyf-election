@@ -70,8 +70,14 @@ function getWinner(candidates) {
  * he/she received
  */
 function winnerMessage(winner) {
-
-}
+    var winner = getWinner(candidates)
+    if (winner !== null) {
+        var message = winner.name + " has won the election with " + winner.numVotes + " votes!";
+        return message
+    } else {
+        return "The election was a draw"
+    };
+};
 
 // A sample population of a small number of voters, stored as an array
 let votingPopulation = [
