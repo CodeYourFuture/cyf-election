@@ -48,8 +48,22 @@ function runElection(voters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
-
-}
+    var winVotes = 0;
+    var notWin = 0;
+    var winner = {};
+    Object.values(candidates).forEach(function (item) {
+        if (item.numVotes > winVotes) {
+            notWin = winVotes;
+            winVotes = item.numVotes;
+            winner = item;
+        };
+    });
+    if (notWin === winVotes) {
+        return null
+    } else {
+        return winner
+    };
+};
 
 /**
  * 5 - Return a message including the name of the winner, and how many votes
