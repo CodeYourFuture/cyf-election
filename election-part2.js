@@ -56,16 +56,12 @@ class Election {
         this.winner = 'winner has not been chosen yet';
     }
     runElection() {
-        // altering the voting cards of the candidates class variable
         this.candidates = runElection(this.validVoters, this.candidates)
 
     } getWinner() {
-        //setting the winner class variable after the winner is calculated
         this.winner = getWinner(this.candidates);
 
     } printWinnerMessage() {
-        // should print a message as before including who won, 
-        //and how many votes he/she received
         if (this.winner === null) { return "The election was a draw"; }
         return this.winner.name + " has won the election with " + this.winner.numVotes + " votes!";
     }
@@ -81,7 +77,7 @@ class Election {
 // Include your candidates object here.
 //let candidates = {};
 
-window.onload = function () {
+
     let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 
     let validVoters = filterInvalidVoters(allVoters);
@@ -92,6 +88,16 @@ window.onload = function () {
 
     console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
 
-}
+/* window.onload = function () {
+    candidateList=document.getElementsByClassName("candidates");
+    updatehtml();
 
+}
+function updatehtml(){
+    candidateList.
+} */
+
+fetch('http://www.mocky.io/v2/5a55224b2d000088425b1ed8')
+.then(function(response){return response.json()})
+.then(function(json){console.log(json);}) 
 

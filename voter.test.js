@@ -17,7 +17,6 @@ test("return only valid voters",()=> {
             new Voter('Sam MacKinnon', 59, [1, 4])]
     )
 }
-
 )
 test('if it has a name', () => {
     let voter = new Voter("mahsa", "18", [1, 2, 3]);

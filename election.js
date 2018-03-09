@@ -24,7 +24,7 @@ function filterInvalidVoters(allVoters) {
  * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
  * the right vote counts for half of the left vote.
  */
-function runElection(validVoters, candidates) {
+/* function runElection(validVoters, candidates) {
     votes = [];
     validVoters.forEach(function (item) {
         votes.push(item.votingCard)
@@ -38,6 +38,19 @@ function runElection(validVoters, candidates) {
         }
     }
     return candidates;
+} */
+//refactored Version of runElection
+function runElection(validVoters, candidates) { 
+    for (let i = 1; i < Object.values(candidates).length; i++) {
+        validVoters.forEach(function (item) {
+            if (item.votingCard[0] === i) {
+                candidates[i].numVotes += 1
+            }
+            if (item.votingCard[1] === i)
+             candidates[i].numVotes += 0.5;
+        })
+    }
+    return candidates;
 }
 /**
  * 4 - After an election has been run, return the winner
@@ -45,22 +58,22 @@ function runElection(validVoters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
-    let winner = {numVotes:0.0};
-  try{
-    Object.values(candidates).forEach(function (item) {
-        /* console.log(item.name,item.numVotes);
-        console.log(winner.name,winner.numVotes);
-        console.log(); */
-        if (item.numVotes == winner.numVotes) {
-            throw "Duplicate";
-        }
-       else   if (item.numVotes > winner.numVotes) {
-            winner = item;
-        }
-    })
-  }catch(error){
-      return null;
-  }
+    let winner = { numVotes: 0.0 };
+    try {
+        Object.values(candidates).forEach(function (item) {
+            /* console.log(item.name,item.numVotes);
+            console.log(winner.name,winner.numVotes);
+            console.log(); */
+            if (item.numVotes == winner.numVotes) {
+                throw "Duplicate";
+            }
+            else if (item.numVotes > winner.numVotes) {
+                winner = item;
+            }
+        })
+    } catch (error) {
+        return null;
+    }
     return winner;
 }
 /**
@@ -91,14 +104,14 @@ let candidates = {
     1: { name: 'Tamara Faiza', age: 46, votingCard: [1, 1], party: 'Pizza Party', numVotes: 0 },
     2: { name: 'Aylin Duke', age: 39, votingCard: [2, 2], party: 'Foam Party', numVotes: 0 },
     3: { name: 'Clay Roderick', age: 54, votingCard: [3, 4], party: 'Flat Earth Party', numVotes: 0 },
-    4: { name: 'Nour al-Din', age: 32, votingCard: [4, 3], party: 'Pizza Party', numVotes: 0 }
-};
+    4: { name: 'Nour al-Din', age: 32, votingCard: [4, 1], party: 'Pizza Party', numVotes: 0 }
+} //4,3 is draw
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 //console.log(allVoters);
 
 let validVoters = filterInvalidVoters(allVoters);
-//console.log(validVoters,"validdddddddddd")
+//console.log(validVoters,"validdddddddddd") //--> array of Objects
 
 candidates = runElection(validVoters, candidates);
 //console.log(candidates);
