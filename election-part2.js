@@ -1,82 +1,14 @@
 // Importing the functions from what you did in part 1.
-function candidatesObjToArray(candidates) {
-    var arrOfKeys = Object.keys(candidates);
-    var arrOfCandidates = arrOfKeys.map(function (key) { return candidates[key]; });
-    return arrOfCandidates;
-}
-/**
- * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
-*/
-function filterInvalidVoters(allVoters) {
-    return allVoters.filter(item => item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]
-    )
-}
-/**
- * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
- * the right vote counts for half of the left vote.
- */
-//refactored Version of runElection
-function runElection(validVoters, candidates) { 
-    //console.log(validVoters,"validVoters")
-    //console.log(candidates,"candidates")
-    for (let i = 1; i < Object.values(candidates).length; i++) {
-        validVoters.forEach(function (item) {
-            if (item.votingCard[0] === i) {
-                candidates[i].numVotes += 1
-            }
-            if (item.votingCard[1] === i)
-             candidates[i].numVotes += 0.5;
-        })
-    }
-    //console.log("after runElec",candidates)
-    return candidates;
-}
-/**
- * 4 - After an election has been run, return the winner
- *
- * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
- */
-function getWinner(candidates) {
-    let winner = { numVotes: 0.0 };
-    try {
-        Object.values(candidates).forEach(function (item) {
-            /* console.log(item.name,item.numVotes);
-            console.log(winner.name,winner.numVotes);
-            console.log(); */
-            if (item.numVotes == winner.numVotes) {
-                throw "Duplicate";
-            }
-            else if (item.numVotes > winner.numVotes) {
-                winner = item;
-            }
-        })
-    } catch (error) {
-        return null;
-    }
-    return winner;
-}
-/**
- * 5 - Return a message including the name of the winner, and how many votes
- * he/she received
- */
-function winnerMessage(winner) {
-    var winner = getWinner(candidates)
-    if (winner !== null) {
-        var mes = winner.name + " has won the election with " + winner.numVotes + " votes!";
-        return mes;
-    }
-    else return "The election was a draw";
-}
-/* const {
+
+ const {
     candidatesObjToArray,
     filterInvalidVoters,
     runElection,
     getWinner,
     winnerMessage,
-} = require('./election'); */
+} = require('./election'); 
 
-/**
- * 1 - Write a Voter class modelling a member of the population who votes in the election.
+ /* 1 - Write a Voter class modelling a member of the population who votes in the election.
  */
 class Voter {
     constructor(name, age, votingCard) {
@@ -97,7 +29,7 @@ let votingPopulation = [
  * However they have some extra properties.
  */
 class Candidate extends Voter {
-    constructor(name, age, votingCard, party) {
+    constructor(name, age, party,votingCard) {
         super(name, age, votingCard);
         this.party = party;
         this.numVotes = 0;
@@ -115,13 +47,14 @@ let candidates = {
 class Election {
     constructor(validVoters, candidates) {
         this.validVoters = validVoters;
+        //console.log(validVoters, "validVoters in class");
         this.candidates = candidates;
         this.winner = 'winner has not been chosen yet';
     }
     runElection() {
         //console.log("runElec is getting called");
         this.candidates = runElection(this.validVoters, this.candidates)
-       // console.log("runElec is getting called after",this.candidates);
+        // console.log("runElec is getting called after",this.candidates);
 
     } getWinner() {
         //console.log("getwinner is getting called")
@@ -143,8 +76,9 @@ class Election {
 
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
-
+console.log(allVoters, "allvoters invoke")
 let validVoters = filterInvalidVoters(allVoters);
+
 
 let election = new Election(validVoters, candidates);
 
