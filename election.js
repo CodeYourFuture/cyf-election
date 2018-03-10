@@ -19,26 +19,10 @@ function filterInvalidVoters(allVoters) {
     return allVoters.filter(item => item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]
     )
 }
-
 /**
  * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
  * the right vote counts for half of the left vote.
  */
-/* function runElection(validVoters, candidates) {
-    votes = [];
-    validVoters.forEach(function (item) {
-        votes.push(item.votingCard)
-    })
-    for (var i = 0; i < votes.length; i++) { //loop through vote array
-        for (var j = 1; j < 5; j++) { //loop through candidates array
-            if (votes[i][0] === j)
-                candidates[j].numVotes += 1;
-            if (votes[i][1] === j)
-                candidates[j].numVotes += 0.5
-        }
-    }
-    return candidates;
-} */
 //refactored Version of runElection
 function runElection(validVoters, candidates) { 
     for (let i = 1; i < Object.values(candidates).length; i++) {
