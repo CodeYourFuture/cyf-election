@@ -175,4 +175,4 @@ listCan.forEach((item, i, listCan) => item.textContent = candidates[i + 1].name)
 // }
 //list of Voters
 let listVote = document.querySelectorAll(".voters li");
-listVote.forEach((item, listVote)=> item.textContent = votingPopulation[i].name);
+listVote.forEach((item, i, listVote)=> item.textContent = votingPopulation[i].name);
