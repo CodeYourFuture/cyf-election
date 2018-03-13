@@ -168,7 +168,7 @@ let listCan = document.querySelectorAll(".candidates li");
 // listCan[2].textContent=candidates["3"].name;
 // listCan[3].textContent=candidates["4"].name;
 
-//listCan.forEach((item,i,candidates)=>item[i].textContent=candidates[i+1].name); //?????
+//listCan.forEach((item,i,candidates)=>item[i].textContent=candidates[i+1].name); //?????solved
 listCan.forEach((item, i, listCan) => item.textContent = candidates[i + 1].name)
 // for (let i = 0; i < listCan.length; i++) {
 //     listCan[i].textContent = candidates[i + 1].name;
