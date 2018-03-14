@@ -135,14 +135,7 @@ class Election {
         if (this.winner === null) { return "The election was a draw"; }
         return this.winner.name + " has won the election with " + this.winner.numVotes + " votes!";
     }
-
 }
-// Include your votingPopulation array here.
-//let votingPopulation = [];
-
-// Include your candidates object here.
-//let candidates = {};
-
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 let validVoters = filterInvalidVoters(allVoters);
 
@@ -151,7 +144,7 @@ let election = new Election(validVoters, candidates);
 election.runElection(); // Example of how runElection() can be called.
 election.getWinner();
 console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
-
+console.log("gggggggggggggg")
 /* 
 fetch('http://www.mocky.io/v2/5a55224b2d000088425b1ed8')
     .then(function (response) { return response.json() })
@@ -176,3 +169,21 @@ listCan.forEach((item, i, listCan) => item.textContent = candidates[i + 1].name)
 //list of Voters
 let listVote = document.querySelectorAll(".voters li");
 listVote.forEach((item, i, listVote)=> item.textContent = votingPopulation[i].name);
+
+
+let ep = "https://www.mocky.io/v2/5a55224b2d000088425b1ed8"
+function sendRequest(url) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            var data = JSON.parse(xmlhttp.responseText);
+            console.log(data.candidates[0].votingCard);
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.setRequestHeader("Access-Control-Allow-Origin","https://geojsonlint.com/")
+    xmlhttp.send();
+}
+ sendRequest(ep)
+console.log(data.candidates[0].votingCard)
+
