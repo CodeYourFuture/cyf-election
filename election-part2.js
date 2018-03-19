@@ -138,6 +138,7 @@ class Election {
     }
 }
  // Example of how the winner message can be printed.
+ 
 /* 
 fetch('http://www.mocky.io/v2/5a55224b2d000088425b1ed8')
     .then(function (response) { return response.json() })
@@ -165,7 +166,7 @@ runButt.addEventListener("click", () => alert(election.printWinnerMessage()));
 
 function fetchElectionData(){
 var data;
-fetch('https://www.mocky.io/v2/5a55224b2d000088425b1ed8').then(res => res.json()).then(function(jsonData){ data = jsonData;
+fetch('https://s3-eu-west-1.amazonaws.com/lorenzomixedstuff/electionList.json').then(res => res.json()).then(function(jsonData){ data = jsonData;
 candidates = data.candidates;
 voters = data.voters;
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
