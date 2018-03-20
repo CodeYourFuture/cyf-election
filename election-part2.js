@@ -34,7 +34,22 @@ class Candidate extends Voter {
 /**
  * 3 - Write an Election class which models the election.
  */
-
+class Election {
+    constructor(validVoters, candidates) {
+        this.validVoters = validVoters;
+        this.candidates = candidates;
+        this.winner = '';
+    };
+    runElection() {
+        this.candidates = runElection(this.validVoters, this.candidates)
+    };
+    getWinner() {
+        this.winner = getWinner(this.candidates)
+    };
+    printWinnerMessage() {
+        return winnerMessage(this.winner)
+    };
+};
 
 
 // Include your votingPopulation array here.
@@ -53,7 +68,7 @@ let candidates = {
     3: new Candidate('Clay Roderick', 54, [3, 4], 'Flat Earth Party'),
     4: new Candidate('Nour al-Din', 32, [4, 1], 'Pizza Party')
 };
-console.log(candidates);
+
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 
