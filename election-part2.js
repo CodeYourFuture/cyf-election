@@ -28,10 +28,9 @@ function filterInvalidVoters(allVoters) {
 function runElection(validVoters, candidates) {
     // console.log(validVoters, "validVoters")
     //console.log(candidates,"candidates")
-    for (let i = 1; i <= Object.values(candidates).length; i++) {
-        //console.log("candidate", i)
+    for (let i = 0; i < candidates.length; i++) {
         validVoters.forEach(function (item) {
-            //console.log(item);
+            //console.log(can);
             if (item.votingCard[0] === i) {
                 candidates[i].numVotes += 1
             }
@@ -50,7 +49,7 @@ function runElection(validVoters, candidates) {
 function getWinner(candidates) {
     let winner = { numVotes: 0.0 };
     try {
-        Object.values(candidates).forEach(function (item) {
+        candidates.forEach(function (item) {
             /* console.log(item.name,item.numVotes);
             console.log(winner.name,winner.numVotes);
             console.log(); */
@@ -123,9 +122,9 @@ class Election {
         this.winner = 'winner has not been chosen yet';
     }
     runElection() {
-        //console.log("runElec is getting called");
+        
         this.candidates = runElection(this.validVoters, this.candidates)
-        // console.log("runElec is getting called after",this.candidates);
+       
 
     } getWinner() {
         //console.log("getwinner is getting called")
@@ -162,21 +161,22 @@ listVote.forEach((item, i, listVote)=> item.textContent = votingPopulation[i].na
 
 //run Election Buttun
 let runButt = document.getElementById("runBut");
-runButt.addEventListener("click", () => alert(election.printWinnerMessage()));
+runButt.addEventListener("click", () => alert(fetchElectionData()));
 
 function fetchElectionData(){
 var data;
 fetch('https://s3-eu-west-1.amazonaws.com/lorenzomixedstuff/electionList.json').then(res => res.json()).then(function(jsonData){ data = jsonData;
-candidates = data.candidates;
+candidates = data.candidates.map(function(item){return new Candidate(item.name, item.age, item.party, item.votingCard)});
+console.log(candidates,"candddddd")
 voters = data.voters;
-let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
+let allVoters = voters.concat(candidates);
 let validVoters = filterInvalidVoters(allVoters);
-console.log(validVoters,"inside fetchfunction")
+console.log(validVoters,"inside fetchfunction validVoters")
 
 let election = new Election(validVoters, candidates);
 election.runElection(); // Example of how runElection() can be called.
-election.getWinner();
-console.log(candidates)
+election.getWinner(); //need to modify it so it becomes a sort only selects max numVotes
+console.log(candidates,"cand")
 console.log(election.printWinnerMessage(),"inside fetchfunction");}
 )
 }
