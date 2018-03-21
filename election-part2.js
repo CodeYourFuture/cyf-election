@@ -26,8 +26,6 @@ function filterInvalidVoters(allVoters) {
  */
 //refactored Version of runElection
 function runElection(validVoters, candidates) {
-    // console.log(validVoters, "validVoters")
-    //console.log(candidates,"candidates")
     for (let i = 0; i < candidates.length; i++) {
         validVoters.forEach(function (item) {
             //console.log(can);
@@ -38,7 +36,6 @@ function runElection(validVoters, candidates) {
                 candidates[i].numVotes += 0.5;
         })
     }
-    //console.log("after runElec",candidates)
     return candidates;
 }
 /**
@@ -47,20 +44,10 @@ function runElection(validVoters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
-    let winner = { numVotes: 0.0 };
-    for (let i = 0; i < candidates.length; i++) {
-        if (candidates[i].numVotes > winner.numVotes) {
-            winner = candidates[i];
-        }
-    }
-    //check if two candidates have the same numVotes we have to return null
-    var maxDuplicate = []
-        for (let i = 0; i < candidates.length; i++) {
-            if (candidates[i].numVotes === winner.numVotes);
-            maxDuplicate.push(candidates[i])
-        }
-        if (maxDuplicate.length > 1) {return null;}
-    return winner; //Hila Waraich won with 26.5 votes
+    candidates.sort(function(a,b) {return b.numVotes-a.numVotes})
+    //check if two candidates have the same numVotes we have to return null-draw
+        if (candidates[0].numVotes===candidates[1].numVotes) {return null;}
+        return candidates[0]; //Hila Waraich won with 26.5 votes
 }
 /**
  * 5 - Return a message including the name of the winner, and how many votes
