@@ -180,4 +180,4 @@ Note again that `candidates` is given as an array, but your code works with `can
 
 ### Exercise 4
 
-Run your code with the new data you should find the the winner is `Eli Wang`, with `26.5` votes.
+Run your code with the new data you should find the the winner is `Hila Waraich`, with `26.5` votes.
