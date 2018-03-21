@@ -1,4 +1,4 @@
-// Importing the functions from what you did in part 1.
+// // Importing the functions from what you did in part 1.
 const {
     candidatesObjToArray,
     filterInvalidVoters,
@@ -17,7 +17,6 @@ class Voter {
             this.votingCard = votingCard
     };
 };
-
 
 /**
  * 2 - Write a Candidate class modelling a candidate in the election. Candidates are also voters (they can vote for themselves, or anyone else).
@@ -60,7 +59,7 @@ let votingPopulation = [
     new Voter('Wei Li', 19, [1, 2]),
     new Voter('Sam MacKinnon', 59, [1, 4])
 ];
-
+// console.log(votingPopulation);
 // Include your candidates object here.
 let candidates = {
     1: new Candidate('Tamara Faiza', 46, [1, 1], 'Pizza Party'),
@@ -68,7 +67,7 @@ let candidates = {
     3: new Candidate('Clay Roderick', 54, [3, 4], 'Flat Earth Party'),
     4: new Candidate('Nour al-Din', 32, [4, 1], 'Pizza Party')
 };
-
+// console.log(candidates);
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 
@@ -77,5 +76,20 @@ let validVoters = filterInvalidVoters(allVoters);
 let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
+
+
+function createList(array) {        // Function to create list of Voter
+    var ul = document.createElement('ul');
+    for (i = 0; i < array.length; i++) {
+        var li = document.createElement("li");
+        var textNode = document.createTextNode(array[i].name);
+        li.appendChild(textNode);
+        ul.appendChild(li);
+        console.log(li);
+    };
+    document.body.appendChild(ul);
+};
+
+createList(votingPopulation);
 
 console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
