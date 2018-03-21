@@ -1,0 +1,177 @@
+/* function candidatesObjToArray(candidates) {
+    var arrOfKeys = Object.keys(candidates);
+    var arrOfCandidates = arrOfKeys.map(function (key) { return candidates[key] });
+    return arrOfCandidates;
+}
+/**
+ * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
+*/
+function filterInvalidVoters(allVoters) {
+    const filteredByLength = allVoters.filter(item => item.votingCard.length < 3);
+    console.log('first filter', filteredByLength);
+    const filteredByClash = filteredByLength.filter(item =>  item.votingCard[0] !== item.votingCard[1])
+    console.log('second filter',filteredByClash)
+    return filteredByClash;
+  }
+/**
+ * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
+ * the right vote counts for half of the left vote.
+ */
+//refactored Version of runElection
+function runElection(validVoters, candidates) {
+   // console.log(validVoters, "validVoters")
+    //console.log(candidates,"candidates")
+    for (let i = 1; i <= Object.values(candidates).length; i++) {
+        //console.log("candidate", i)
+        validVoters.forEach(function (item) {
+            //console.log(item);
+            if (item.votingCard[0] === i) {
+                candidates[i].numVotes += 1
+            }
+            if (item.votingCard[1] === i)
+                candidates[i].numVotes += 0.5;
+        })
+    }
+    //console.log("after runElec",candidates)
+    return candidates;
+}
+/**
+ * 4 - After an election has been run, return the winner
+ *
+ * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
+ */
+function getWinner(candidates) {
+    let winner = { numVotes: 0.0 };
+    try {
+        Object.values(candidates).forEach(function (item) {
+            /* console.log(item.name,item.numVotes);
+            console.log(winner.name,winner.numVotes);
+            console.log(); */
+            if (item.numVotes == winner.numVotes) {
+                throw "Duplicate";
+            }
+            else if (item.numVotes > winner.numVotes) {
+                winner = item;
+            }
+        })
+    } catch (error) {
+        return null;
+    }
+    return winner;
+}
+/**
+ * 5 - Return a message including the name of the winner, and how many votes
+ * he/she received
+ */
+function winnerMessage(winner) {
+    var winner = getWinner(candidates)
+    if (winner !== null) {
+        var mes = winner.name + " has won the election with " + winner.numVotes + " votes!";
+        return mes;
+    }
+    else return "The election was a draw";
+} */
+
+let urll = "https://www.mocky.io/v2/5a55224b2d000088425b1ed8"
+// function sendRequest(url) {
+//     var xmlhttp = new XMLHttpRequest();
+//     xmlhttp.onreadystatechange = function () {
+//         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+//             var data = JSON.parse(xmlhttp.responseText);
+//             console.log(data);
+//         }
+//     }
+//     xmlhttp.open("GET", url, true);
+//     xmlhttp.setRequestHeader("Access-Control-Allow-Origin","https://geojsonlint.com/")
+//     xmlhttp.send();
+// }
+// sendRequest(urll)
+
+// console.log("hi")
+// var ourReq=new XMLHttpRequest();
+// console.log("hi2")
+// ourReq.open('GET','https://www.mocky.io/v2/5a55224b2d000088425b1ed8')
+// ourReq.setRequestHeader("Access-Control-Allow-Origin","https://geojsonlint.com/")
+// ourReq.onload=function(){
+// var ourData=JSON.parse(ourReq.responseText)
+// console.log(ourData);
+// console.log("hi3")
+// };
+// ourReq.send();
+// console.log("hi4")
+
+//JSON works individually or even in a blank dev tools but doesent log when u open index.html, why ????
+// 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function candidatesObjToArray(candidates) {
+    var arrOfKeys = Object.keys(candidates);
+    var arrOfCandidates = arrOfKeys.map(function (key) { return candidates[key] });
+    return arrOfCandidates;
+}
+/**
+ * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
+*/
+function filterInvalidVoters(allVoters) {
+    const filteredByLength = allVoters.filter(item => item.votingCard.length < 3);
+    const filteredByClash = filteredByLength.filter(item => item.votingCard[0] !== item.votingCard[1])
+    return filteredByClash;
+}
+/**
+ * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
+ * the right vote counts for half of the left vote.
+ */
+//refactored Version of runElection
+function runElection(validVoters, candidates) {
+    // console.log(validVoters, "validVoters")
+    //console.log(candidates,"candidates")
+    for (let i = 1; i <= Object.values(candidates).length; i++) {
+        //console.log("candidate", i)
+        validVoters.forEach(function (item) {
+            //console.log(item);
+            if (item.votingCard[0] === i) {
+                candidates[i].numVotes += 1
+            }
+            if (item.votingCard[1] === i)
+                candidates[i].numVotes += 0.5;
+        })
+    }
+    //console.log("after runElec",candidates)
+    return candidates;
+}
+/**
+ * 4 - After an election has been run, return the winner
+ *
+ * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
+ */
+function getWinner(candidates) {
+    let winner = { numVotes: 0.0 };
+    try {
+        Object.values(candidates).forEach(function (item) {
+            /* console.log(item.name,item.numVotes);
+            console.log(winner.name,winner.numVotes);
+            console.log(); */
+            if (item.numVotes == winner.numVotes) {
+                throw "Duplicate";
+            }
+            else if (item.numVotes > winner.numVotes) {
+                winner = item;
+            }
+        })
+    } catch (error) {
+        return null;
+    }
+    return winner;
+}
+/**
+ * 5 - Return a message including the name of the winner, and how many votes
+ * he/she received
+ */
+function winnerMessage(winner) {
+    var winner = getWinner(candidates)
+    if (winner !== null) {
+        var mes = winner.name + " has won the election with " + winner.numVotes + " votes!";
+        return mes;
+    }
+    else return "The election was a draw";
+}
