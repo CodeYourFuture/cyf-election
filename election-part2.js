@@ -145,27 +145,25 @@ listVote.forEach((item, i, listVote) => item.textContent = votingPopulation[i].n
 
 //run Election Buttun
 let runButt = document.getElementById("runBut");
-runButt.addEventListener("click", () => alert(fetchElectionData()));
+runButt.addEventListener("click", () => fetchElectionData().then(message=>alert(message)));
 
 function fetchElectionData() {
     var data;
-    fetch('https://s3-eu-west-1.amazonaws.com/lorenzomixedstuff/electionList.json').then(res => res.json()).then(function (jsonData) {
+    //return 2;
+     return fetch('https://s3-eu-west-1.amazonaws.com/lorenzomixedstuff/electionList.json').then(res => res.json()).then(function (jsonData) {
         data = jsonData;
         candidates = data.candidates.map(function (item) { return new Candidate(item.name, item.age, item.party, item.votingCard) });
-        console.log(candidates, "candddddd")
         voters = data.voters;
         let allVoters = voters.concat(candidates);
         let validVoters = filterInvalidVoters(allVoters);
-        console.log(validVoters, "inside fetchfunction validVoters")
 
         let election = new Election(validVoters, candidates);
         election.runElection(); // Example of how runElection() can be called.
         election.getWinner(); //need to modify it so it becomes a sort only selects max numVotes
-        console.log(election.printWinnerMessage(), "inside fetchfunction who won?");
-        election.printWinnerMessage()
+        var message = election.printWinnerMessage();
+         return message;
     }
     )
 }
-fetchElectionData();
 
 
