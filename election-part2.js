@@ -48,22 +48,19 @@ function runElection(validVoters, candidates) {
  */
 function getWinner(candidates) {
     let winner = { numVotes: 0.0 };
-    try {
-        candidates.forEach(function (item) {
-            /* console.log(item.name,item.numVotes);
-            console.log(winner.name,winner.numVotes);
-            console.log(); */
-            if (item.numVotes == winner.numVotes) {
-                throw "Duplicate";
-            }
-            else if (item.numVotes > winner.numVotes) {
-                winner = item;
-            }
-        })
-    } catch (error) {
-        return null;
+    for (let i = 0; i < candidates.length; i++) {
+        if (candidates[i].numVotes > winner.numVotes) {
+            winner = candidates[i];
+        }
     }
-    return winner;
+    //check if two candidates have the same numVotes we have to return null
+    var maxDuplicate = []
+        for (let i = 0; i < candidates.length; i++) {
+            if (candidates[i].numVotes === winner.numVotes);
+            maxDuplicate.push(candidates[i])
+        }
+        if (maxDuplicate.length > 1) {return null;}
+    return winner; //Hila Waraich won with 26.5 votes
 }
 /**
  * 5 - Return a message including the name of the winner, and how many votes
@@ -122,9 +119,9 @@ class Election {
         this.winner = 'winner has not been chosen yet';
     }
     runElection() {
-        
+
         this.candidates = runElection(this.validVoters, this.candidates)
-       
+
 
     } getWinner() {
         //console.log("getwinner is getting called")
@@ -136,8 +133,8 @@ class Election {
         return this.winner.name + " has won the election with " + this.winner.numVotes + " votes!";
     }
 }
- // Example of how the winner message can be printed.
- 
+// Example of how the winner message can be printed.
+
 /* 
 fetch('http://www.mocky.io/v2/5a55224b2d000088425b1ed8')
     .then(function (response) { return response.json() })
@@ -157,29 +154,31 @@ listCan.forEach((item, i, listCan) => item.textContent = candidates[i + 1].name)
 // }
 //list of Voters
 let listVote = document.querySelectorAll(".voters li");
-listVote.forEach((item, i, listVote)=> item.textContent = votingPopulation[i].name);
+listVote.forEach((item, i, listVote) => item.textContent = votingPopulation[i].name);
 
 //run Election Buttun
 let runButt = document.getElementById("runBut");
 runButt.addEventListener("click", () => alert(fetchElectionData()));
 
-function fetchElectionData(){
-var data;
-fetch('https://s3-eu-west-1.amazonaws.com/lorenzomixedstuff/electionList.json').then(res => res.json()).then(function(jsonData){ data = jsonData;
-candidates = data.candidates.map(function(item){return new Candidate(item.name, item.age, item.party, item.votingCard)});
-console.log(candidates,"candddddd")
-voters = data.voters;
-let allVoters = voters.concat(candidates);
-let validVoters = filterInvalidVoters(allVoters);
-console.log(validVoters,"inside fetchfunction validVoters")
+function fetchElectionData() {
+    var data;
+    fetch('https://s3-eu-west-1.amazonaws.com/lorenzomixedstuff/electionList.json').then(res => res.json()).then(function (jsonData) {
+        data = jsonData;
+        candidates = data.candidates.map(function (item) { return new Candidate(item.name, item.age, item.party, item.votingCard) });
+        console.log(candidates, "candddddd")
+        voters = data.voters;
+        let allVoters = voters.concat(candidates);
+        let validVoters = filterInvalidVoters(allVoters);
+        console.log(validVoters, "inside fetchfunction validVoters")
 
-let election = new Election(validVoters, candidates);
-election.runElection(); // Example of how runElection() can be called.
-election.getWinner(); //need to modify it so it becomes a sort only selects max numVotes
-console.log(candidates,"cand")
-console.log(election.printWinnerMessage(),"inside fetchfunction");}
-)
+        let election = new Election(validVoters, candidates);
+        election.runElection(); // Example of how runElection() can be called.
+        election.getWinner(); //need to modify it so it becomes a sort only selects max numVotes
+        console.log(election.printWinnerMessage(), "inside fetchfunction who won?");
+        election.printWinnerMessage()
+    }
+    )
 }
 fetchElectionData();
-//console.log(candidates,"last line")
+
 
