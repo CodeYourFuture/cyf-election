@@ -1,11 +1,79 @@
 // // Importing the functions from what you did in part 1.
-const {
-    candidatesObjToArray,
-    filterInvalidVoters,
-    runElection,
-    getWinner,
-    winnerMessage,
-} = require('./election');
+// const {
+//     candidatesObjToArray,
+//     filterInvalidVoters,
+//     runElection,
+//     getWinner,
+//     winnerMessage,
+// } = require('./election');
+function candidatesObjToArray(candidates) {
+    var arrayCandidates = Object.keys(candidates).map(function (key) {  // first method
+        return candidates[key];
+    });
+    // var arrayCandidates = Object.values(candidates);   // second method
+    return arrayCandidates;
+};
+
+function filterInvalidVoters(allVoters) {
+    var arrayVoters = allVoters.filter(function (item) {
+        if (item.votingCard.length < 3 && item.votingCard[0] !== item.votingCard[1]) {
+            return item;
+        };
+    });
+    return arrayVoters;
+}
+
+function runElection(voters, candidates) {
+    for (var i = 0; i < voters.length; i++) {
+        for (var j = 1; j <= Object.keys(candidates).length; j++) {
+            if (voters[i].votingCard[0] === j)
+                candidates[j].numVotes += 1;
+            if (voters[i].votingCard[1] === j)
+                candidates[j].numVotes += 0.5;
+        };
+    };
+    return candidates;
+};
+
+function getWinner(candidates) {
+    var winVotes = 0;
+    var notWin = 0;
+    var winner = {};
+    Object.values(candidates).forEach(function (item) {
+        if (item.numVotes >= winVotes) {
+            notWin = winVotes;
+            winVotes = item.numVotes;
+            winner = item;
+        };
+    });
+    if (notWin === winVotes) {
+        return null
+    } else {
+        return winner
+    };
+};
+
+function winnerMessage(winner) {
+    var winner = getWinner(candidates)
+    if (winner !== null) {
+        var message = winner.name + " has won the election with " + winner.numVotes + " votes!";
+        return message
+    } else {
+        return "The election was a draw"
+    };
+};
+
+function createList(array) {        // Function to create list of Voters and Candidates
+    var ul = document.createElement('ul');
+    for (i = 0; i < array.length; i++) {
+        var li = document.createElement("li");
+        var textNode = document.createTextNode(array[i].name);
+        li.appendChild(textNode);
+        ul.appendChild(li);
+        console.log(li);
+    };
+    document.body.appendChild(ul);
+};
 
 /**
  * 1 - Write a Voter class modelling a member of the population who votes in the election.
@@ -77,19 +145,15 @@ let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
 
-
-function createList(array) {        // Function to create list of Voter
-    var ul = document.createElement('ul');
-    for (i = 0; i < array.length; i++) {
-        var li = document.createElement("li");
-        var textNode = document.createTextNode(array[i].name);
-        li.appendChild(textNode);
-        ul.appendChild(li);
-        console.log(li);
-    };
-    document.body.appendChild(ul);
-};
-
 createList(votingPopulation);
+
+createList(candidatesObjToArray(candidates));
+
+var button = document.createElement('button');
+button.setAttribute('id', 'run-election-btn');
+var text = document.createTextNode('Run Election');
+button.appendChild(text);
+button.addEventListener('click', runElection);
+document.body.appendChild(button);
 
 console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
