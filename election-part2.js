@@ -63,7 +63,7 @@ function winnerMessage(winner) {
     };
 };
 
-function createList(array) {        // Function to create list of Voters and Candidates
+function createList(container, array) {        // Function to create list of Voters and Candidates
     var ul = document.createElement('ul');
     for (i = 0; i < array.length; i++) {
         var li = document.createElement("li");
@@ -72,7 +72,7 @@ function createList(array) {        // Function to create list of Voters and Can
         ul.appendChild(li);
         console.log(li);
     };
-    document.body.appendChild(ul);
+    container[0].appendChild(ul);
 };
 
 /**
@@ -118,7 +118,6 @@ class Election {
     };
 };
 
-
 // Include your votingPopulation array here.
 let votingPopulation = [
     new Voter('Jane Finnegan', 19, [1, 3]),
@@ -135,7 +134,6 @@ let candidates = {
     3: new Candidate('Clay Roderick', 54, [3, 4], 'Flat Earth Party'),
     4: new Candidate('Nour al-Din', 32, [4, 1], 'Pizza Party')
 };
-// console.log(candidates);
 
 let allVoters = votingPopulation.concat(candidatesObjToArray(candidates));
 
@@ -144,16 +142,21 @@ let validVoters = filterInvalidVoters(allVoters);
 let election = new Election(validVoters, candidates);
 
 election.runElection(); // Example of how runElection() can be called.
-
-createList(votingPopulation);
-
-createList(candidatesObjToArray(candidates));
-
+// Create List of Voters
+var container = document.getElementsByClassName('voters');
+createList(container, votingPopulation);
+//***********************
+// Create list of Candidates
+var container = document.getElementsByClassName('candidates');
+createList(container, candidatesObjToArray(candidates));
+//**********************
+//  Create Button Vote!!!
 var button = document.createElement('button');
 button.setAttribute('id', 'run-election-btn');
 var text = document.createTextNode('Run Election');
 button.appendChild(text);
 button.addEventListener('click', runElection);
-document.body.appendChild(button);
-
+var parentBut = document.getElementsByClassName('button-vote')
+parentBut[0].appendChild(button);
+// **************************************
 console.log(election.printWinnerMessage()); // Example of how the winner message can be printed.
