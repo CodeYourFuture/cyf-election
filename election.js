@@ -7,6 +7,12 @@
  */
 function candidatesObjToArray(candidates) {
 
+  
+    const Array = Object.keys(candidates).map(i => candidates[i])
+
+    return Array
+
+
 }
 
 /**
