@@ -7,22 +7,48 @@
  */
 function candidatesObjToArray(candidates) {
 
+  
+    const Array = Object.values(candidates)
+
+    return Array
+//  const Array = Object.keys(candidates).map(i => candidates[i])   another way
+// return Array
+
+
 }
 
 /**
  * 2 - Remove any voters who have voted for more than 2 people, or have voted for the same person twice.
 */
-function filterInvalidVoters(voters) {
+function filterInvalidVoters(allVoters) {
 
-}
+     return allVoters.filter(function (element){
+
+        return element.votingCard.length <3 && element.votingCard[0] !== element.votingCard[1]
+        
+      });      
+      }
 
 /**
  * 3 - Add up all the votes cast by the voting population. Note that for two adjacent votes in the vote array,
  * the right vote counts for half of the left vote.
  */
 function runElection(voters, candidates) {
+           for (var i = 0; i < voters.length; i++) {
+              for (var x = 1; x <= Object.values(candidates).length; x++) {
+                   if (voters[i].votingCard[0] === x)
+                       candidates[x].numVotes += 1;
+                   if (voters[i].votingCard[1] === x)
+                       candidates[x].numVotes += 0.5;
+               };
+           };
+        
+               return candidates;
+        };
+       
 
-}
+
+
 
 /**
  * 4 - After an election has been run, return the winner
@@ -30,14 +56,34 @@ function runElection(voters, candidates) {
  * Desired return value: {name: "Tamara Faiza", age: 46, party: "Pizza Party", numVotes: 3}
  */
 function getWinner(candidates) {
+    var max = 0
+    var min = 0
+    var winner = {}
+    
+        for (var x = 1; x <= Object.values(candidates).length; x++) {
+          
+        if (candidates[x].numVotes>max){
+            min = max;
+            max = candidates[x].numVotes
+            winner = candidates[x]
+        }
+  }
+        if (min === max ){
+            return null
+        } else {
+            return winner
+        }
+    }
 
-}
-
+    
 /**
  * 5 - Return a message including the name of the winner, and how many votes
  * he/she received
  */
 function winnerMessage(winner) {
+    //'Tamara Faiza has won the election with 3.5 votes!'
+   var message = winner.name + " has won the election with " + winner.numVotes + " votes!"
+return message
 
 }
 
